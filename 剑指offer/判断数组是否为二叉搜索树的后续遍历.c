@@ -5,7 +5,7 @@ bool judge(int a[],int l,int r){
 	}
 
 	int i = r;
-	for (i>1 && a[i-1] > a[r]) --i;
+	while (i>1 && a[i-1] > a[r]) --i;
 
 		for (int j = i-1; j >1; j--)
 		{
