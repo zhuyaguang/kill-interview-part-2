@@ -27,3 +27,22 @@ void main()
 	cout<<find(num,15)<<endl;
 	system("pause");
 }
+// 我的另一种方法
+#include <iostream>
+using namespace std;
+
+int main(){
+    int num[13]={1,2,3,4,4,4,4,4,4,4,5,6,7};
+    
+    int index[10]={0};
+    
+    for (int i = 0; i<13; i++) {
+        index[num[i]]++;
+    }
+    
+    for (int i = 0; i<10; i++) {
+        if (index[i] > 13 /2 ) {
+            cout<<i;
+        }
+    }
+}
