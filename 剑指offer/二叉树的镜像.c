@@ -7,7 +7,9 @@ struct TreeNode {
     struct TreeNode *right;
     }
 
-   if(pRoot == NULL){
+   void Mirror(TreeNode *pRoot) {
+        
+          if(pRoot == NULL){
             return ;
         }
          
@@ -20,5 +22,7 @@ struct TreeNode {
         }
          
         if(pRoot->right){
-           Mirror(pRoot->right);
+            Mirror(pRoot->right);
         }
+
+    }
