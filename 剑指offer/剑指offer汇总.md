@@ -248,6 +248,7 @@ int main()
 >
 
 
+
 > 第一个指针先走k步,第二个指针开始走，当第一个指针走到尽头的时候，第二个指针就是倒数第K个结点
 
 ```c++
@@ -366,4 +367,179 @@ ListNode *merge(ListNode *head1,ListNode *head2)
 ```
 
 ### 17.[树的子结构](http://www.nowcoder.com/practice/6e196c44c7004d15b1610b9afca8bd88?tpId=13&tqId=11170&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
+
+> 输入两棵二叉树A，B，判断B是不是A的子结构。（ps：我们约定空树不是任意一个树的子结构）
+>
+
+```C++
+#include<iostream>
+using namespace std;
+
+struct TreeNode {
+	int val;
+	struct TreeNode *left;
+	struct TreeNode *right;
+	}
+
+bool isSubTree(TreeNode* pRoot1, TreeNode* pRoot2){
+	if (pRoot2 == NULL)
+	{
+		return true;
+	}
+
+	if (pRoot1 == NULL && pRoot2 == NULL)
+	{
+		return false;
+	}
+
+	if (pRoot1->val == pRoot2->val)
+	{
+		return isSubTree(pRoot1->left,pRoot2->left) && isSubTree(pRoot1->right,pRoot2->right);
+	}
+	else return false;
+}
+
+
+//第一步寻找1中是否有2根节点一样值的点
+bool HasSubtree(TreeNode* pRoot1, TreeNode* pRoot2)
+{
+    		bool flag = false;
+
+    if (pRoot2 == NULL)
+	{
+		return false;
+	}
+
+	if (pRoot1 == NULL && pRoot2 != NULL)
+	{
+		return false;
+	}
+
+	if (pRoot1->val == pRoot2->val)
+	{
+		//找到值一样的点后，就判断结构是不是一样
+		flag = isSubTree(pRoot1,pRoot2);
+	}
+
+	if (!flag)
+	{
+		flag = HasSubtree(pRoot1->left,pRoot2);
+	}
+	if (!flag)
+	{
+		flag = HasSubtree(pRoot1->right,pRoot2);
+	}
+
+	return flag;
+}
+```
+
+### 18.[二叉树的镜像](http://www.nowcoder.com/practice/564f4c26aa584921bc75623e48ca3011?tpId=13&tqId=11171&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
+
+> 操作给定的二叉树，将其变换为源二叉树的镜像。
+>
+
+```c++
+#include<iostream>
+using namespace std;
+
+struct TreeNode {
+    int val;
+    struct TreeNode *left;
+    struct TreeNode *right;
+    }
+
+   void Mirror(TreeNode *pRoot) {
+        
+          if(pRoot == NULL){
+            return ;
+        }
+         
+        TreeNode *temp = pRoot->left;
+        pRoot->left = pRoot->right;
+        pRoot->right = temp;
+         
+        if(pRoot->left){
+            Mirror(pRoot->left);
+        }
+         
+        if(pRoot->right){
+            Mirror(pRoot->right);
+        }
+
+    }
+```
+
+### 19.[顺时针打印矩阵](http://www.nowcoder.com/practice/9b4c81a02cd34f76be2659fa0d54342a?tpId=13&tqId=11172&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
+
+```c++
+#include<iostream>
+using namespace std;
+
+int printMatrix(int** numbers,int columns,int rows){
+	//定义四个关键变量来定义打印的范围
+	
+	int left = 0,right = columns -1,top = 0,button = rows -1;
+
+	while(left <= right && top <= button)
+	{
+		//左到右
+		for (int i = left; i <= right; ++i)
+		{
+			cout<<numbers[top][i];
+		}
+		//上到下
+		for (int i = top+1; i <= button; ++i)
+		{
+			cout<<numbers[right][i];	
+		}
+		//右到左
+		if (top != button)
+		
+		for (int i = right-1; i >= left; --i)
+		{
+			cout<<numbers[button][i];
+		}
+		//下到上
+		if (left != right)
+		for (int i = button-1; i >= top+1; --i)
+		{
+			cout<<numbers[left][i];
+		}
+
+		left++;right--;top++;button--;
+	} 
+}
+```
+
+### 20.[包含min函数的栈](http://www.nowcoder.com/practice/4c776177d2c04c2494f2555c9fcc1e49?tpId=13&tqId=11173&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
+
+> 定义栈的数据结构，请在该类型中实现一个能够得到栈最小元素的min函数。
+>
+
+```C++ 
+ stack<int> m_data, m_min;
+     
+    void push(int value) {
+        m_data.push(value);
+        if(m_min.size() == 0 || m_min.top() > value){
+            m_min.push(value);
+        }else {
+            m_min.push(m_min.top());
+        }
+    }
+    void pop() {
+        assert(m_data.size() >0 && m_min.size() > 0);
+        m_data.pop();
+        m_min.pop();
+    }
+    int top() {
+        assert(m_data.size() > 0 && m_min.size() > 0);
+        return m_data.top();
+    }
+    int min() {
+        assert(m_data.size() > 0 && m_min.size() > 0);
+        return m_min.top();
+    }
+```
 
