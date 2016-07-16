@@ -27,3 +27,41 @@
         }
          
     }
+    
+    
+    //my solution
+    
+    #include <iostream>
+#include <vector>
+#include <sstream>
+using namespace std;
+
+int main()
+{
+    vector<string> a;
+    string s;
+    getline(cin,s);
+    
+    for (int i = 0; i<s.length(); i++) {
+        stringstream stream;
+        stream << s[i];
+        string tep = stream.str();
+        a.push_back(tep);
+    }
+    
+    
+    int len = int(a.size()-1);
+    
+    for (int  i = 0; i<len; i++) {
+        if(a[i] == " ")
+        {
+            a[i] = "%20";
+        }
+    }
+    
+     for (int  i = 0; i<=len; i++) {
+         cout<<a[i];
+     }
+    
+    return 0;
+}
