@@ -49,4 +49,3 @@ void main()
 	print_num(a,9);
 	system("pause");
 }
-}

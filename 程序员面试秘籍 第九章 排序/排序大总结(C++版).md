@@ -3,9 +3,6 @@
 ### 直接插入排序
 
 ```C++
-#include<stdio.h>
-#include<malloc.h>
-#include<stdlib.h>
 #include<iostream>
 using namespace std;
 void insert_sort(int a[],int n)
@@ -42,9 +39,6 @@ void main()
 ### 选择排序
 
 ```c++
-#include<stdio.h>
-#include<malloc.h>
-#include<stdlib.h>
 #include<iostream>
 using namespace std;
 void select_sort(int a[],int n)
@@ -84,9 +78,6 @@ void main()
 ### 冒泡排序
 
 ```c++
-#include<stdio.h>
-#include<malloc.h>
-#include<stdlib.h>
 #include<iostream>
 using namespace std;
 void bubble_sort(int a[],int n)
@@ -132,9 +123,6 @@ void main()
 ### 快速排序
 
 ```c++
-#include<stdio.h>
-#include<malloc.h>
-#include<stdlib.h>
 #include<iostream>
 using namespace std;
 void quickSort(int *arr,int l,int r)
@@ -185,12 +173,8 @@ void main()
 }
 ```
 
-### 堆排序
-
 ```c++
-#include<stdio.h>
-#include<malloc.h>
-#include<stdlib.h>
+//堆排序
 #include<iostream>
 using namespace std;
 
@@ -252,9 +236,6 @@ void main()
 ### 希尔排序
 
 ```c++
-#include<stdio.h>
-#include<malloc.h>
-#include<stdlib.h>
 #include<iostream>
 using namespace std;
 void shell_sort(int a[],int n)
