@@ -1,18 +1,18 @@
 # kill-interview-part-2
 面试算法备急方第二卷
 
-# 肘后备急方（你的算法题急救手册）
+> 肘后备急方（你的算法题急救手册）
 
 * 《肘后备急方》，古代汉医方剂著作。是中国第一部临床急救手册。中医治疗学专著。8卷，70篇。东晋时期葛洪著。
 * 我的面试算法备急方第一卷：基础编程题 目的是那些很久没有写过c/c++ 代码的同学的一剂急药 让你敲完这68题 回忆起编程题的基础部分 输入输出 循环 等等……（已完结）
 * 面试算法备急方第二卷：中级编程题 这些题都是各个公司笔试题的前几题 是面试的入门题 主要包括 字符串 数组 一般的数据结构 排序 (更新中)
 * 面试算法备急方第三卷：高级编程题 高级算法题 KMP 动态规划 ACMER 之类的 （准备中）
 
-# 数组
+## 数组
 
 * 求连字串的最大和
 
-# 数据结构
+## 数据结构（程序员面试秘籍）
 
 * 单链表的构造 插入 逆序 删除 打印 等操作
 
@@ -26,7 +26,7 @@
 
 * 约瑟夫环的问题
 
-# 排序
+## 排序（程序员面试秘籍）
 
 * 堆排序
 * 快速排序
@@ -37,7 +37,7 @@
 * 排序汇总
 * 排序大总结.md
 
-# 字符串
+## 字符串（程序员面试秘籍）
 
 * 编程实现strcat
 * 大数相加
@@ -56,3 +56,14 @@
 * 字符串循环右移
 * 字符串转换数字不用库函数
 * 字符串转换数字使用库函数
+
+## 剑指offer
+
+[剑指offer汇总]([kill-interview-part-2](https://github.com/zhuyaguang/kill-interview-part-2)/[剑指offer](https://github.com/zhuyaguang/kill-interview-part-2/tree/master/%E5%89%91%E6%8C%87offer)/**剑指offer汇总.md**)
+
+## 华为机试题
+
+[华为机试题汇总]([kill-interview-part-2](https://github.com/zhuyaguang/kill-interview-part-2)/[华为机试题](https://github.com/zhuyaguang/kill-interview-part-2/tree/master/%E5%8D%8E%E4%B8%BA%E6%9C%BA%E8%AF%95%E9%A2%98)/**华为机试题.md**)
+
+
+
