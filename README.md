@@ -59,11 +59,11 @@
 
 ## 剑指offer
 
-[剑指offer汇总]([kill-interview-part-2](https://github.com/zhuyaguang/kill-interview-part-2)/[剑指offer](https://github.com/zhuyaguang/kill-interview-part-2/tree/master/%E5%89%91%E6%8C%87offer)/**剑指offer汇总.md**)
+[剑指offer汇总](https://github.com/zhuyaguang/kill-interview-part-2/blob/master/%E5%89%91%E6%8C%87offer/%E5%89%91%E6%8C%87offer%E6%B1%87%E6%80%BB.md)
 
 ## 华为机试题
 
-[华为机试题汇总]([kill-interview-part-2](https://github.com/zhuyaguang/kill-interview-part-2)/[华为机试题](https://github.com/zhuyaguang/kill-interview-part-2/tree/master/%E5%8D%8E%E4%B8%BA%E6%9C%BA%E8%AF%95%E9%A2%98)/**华为机试题.md**)
+[华为机试题汇总](https://github.com/zhuyaguang/kill-interview-part-2/blob/master/%E5%8D%8E%E4%B8%BA%E6%9C%BA%E8%AF%95%E9%A2%98/%E5%8D%8E%E4%B8%BA%E6%9C%BA%E8%AF%95%E9%A2%98.md)
 
 
 
