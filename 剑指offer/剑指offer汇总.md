@@ -1,8 +1,10 @@
 ## 剑指offer汇总
 
-### 1.[二维数组中的查找](http://www.nowcoder.com/practice/abc3fe2ce8e146608e868a70efebf62e?tpId=13&tqId=11154&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
+### 1.[剑指 Offer 04. 二维数组中的查找](https://leetcode-cn.com/problems/er-wei-shu-zu-zhong-de-cha-zhao-lcof/)
 
-> 我的暴力方法，双重循环查找
+> 同[240. 搜索二维矩阵 II](https://leetcode-cn.com/problems/search-a-2d-matrix-ii/)相同
+
+#### 解法一：暴力
 
 ```c++
 #include<iostream>
@@ -34,9 +36,44 @@ int main()
  }
 ```
 
-### 2.[替换空格](http://www.nowcoder.com/practice/4060ac7e3e404ad1a894ef3e17650423?tpId=13&tqId=11155&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
+#### 解法二:从左下角或者右上角查找
 
-> 同样是我的方法，利用了sstream
+```Go
+func findNumberIn2DArray(matrix [][]int, target int) bool {
+    m:=len(matrix)
+    if m==0{
+        return false
+    }
+    n:=len(matrix[0])
+    i:=m-1
+    j:=0
+    for i>=0&&j<n{
+        if matrix[i][j]>target{
+            i--
+        }else if matrix[i][j]<target{
+            j++
+        }else if matrix[i][j]==target{
+            return true
+        }
+    }
+    return false
+}
+
+```
+
+
+
+### 2.[剑指 Offer 05. 替换空格](https://leetcode-cn.com/problems/ti-huan-kong-ge-lcof/)
+
+Go版本
+
+```go
+func replaceSpace(s string) string {
+        return strings.ReplaceAll(s," ","%20")
+}
+```
+
+C++版本
 
 ```c++
 #include <iostream>
