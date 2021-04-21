@@ -1,4 +1,5 @@
 # kill-interview-part-2
+
 面试算法备急方第二卷
 
 > 肘后备急方（你的算法题急救手册）
@@ -8,25 +9,13 @@
 
 ## 排序
 
-* 堆排序
+>  堆排序、快速排序、冒泡排序、希尔排序、选择排序、直接插入排序
 
-* 快速排序
+[C++版](https://github.com/zhuyaguang/kill-interview-part-2/blob/master/%E6%8E%92%E5%BA%8F/%E6%8E%92%E5%BA%8F%E5%A4%A7%E6%80%BB%E7%BB%93(C%2B%2B%E7%89%88).md)
 
-* 冒泡排序
+[C版](https://github.com/zhuyaguang/kill-interview-part-2/blob/master/%E6%8E%92%E5%BA%8F/%E6%8E%92%E5%BA%8F%E5%A4%A7%E6%80%BB%E7%BB%93(C%E8%AF%AD%E8%A8%80%E7%89%88).md)
 
-* 希尔排序
-
-* 选择排序
-
-* 直接插入排序
-
-* 排序汇总
-
-  C++版
-
-  C版
-
-  Golang版
+[Golang版](https://github.com/zhuyaguang/kill-interview-part-2/blob/master/%E6%8E%92%E5%BA%8F/%E6%8E%92%E5%BA%8F%E5%A4%A7%E6%80%BB%E7%BB%93(Golang%E7%89%88).md)
 
 ## 剑指offer
 
