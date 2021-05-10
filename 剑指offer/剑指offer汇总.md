@@ -1,5 +1,7 @@
 ## 剑指offer汇总
 
+> 4,6.10-1,10-2,10-3,10-4,12
+
 ### 1.[剑指 Offer 04. 二维数组中的查找](https://leetcode-cn.com/problems/er-wei-shu-zu-zhong-de-cha-zhao-lcof/)
 
 > 同[240. 搜索二维矩阵 II](https://leetcode-cn.com/problems/search-a-2d-matrix-ii/)相同
@@ -71,6 +73,19 @@ Go版本
 func replaceSpace(s string) string {
         return strings.ReplaceAll(s," ","%20")
 }
+
+// 使用 strings.Builder
+func replaceSpace(s string) string {
+	var res strings.Builder
+    for i:=range s{
+    	if s[i]==' '{
+			res.WriteString("%20")
+		}else {
+			res.WriteByte(s[i])
+		}
+	}
+	return res.String()
+}
 ```
 
 C++版本
@@ -112,15 +127,73 @@ int main()
 }
 ```
 
-### 3.[从尾到头打印链表](http://www.nowcoder.com/practice/d0267f7f55b3412ba93bd35cfa8e8035?tpId=13&tqId=11156&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
+### 3.[从尾到头打印链表](https://leetcode-cn.com/problems/cong-wei-dao-tou-da-yin-lian-biao-lcof/)
 
-### 4.[重建二叉树](http://www.nowcoder.com/practice/8a19cbe657394eeaac2f6ea9b0f6fcf6?tpId=13&tqId=11157&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
+```go
+func reversePrint(head *ListNode) []int {
+  arr:=[]int{}
+  cur:=head
+  for cur !=nil{
+  	arr =append(arr,cur.Val)
+  	cur=cur.Next
+  }
+  return reverseArr(arr)
+}
 
-### 5.[用两个栈实现队列](http://www.nowcoder.com/practice/54275ddae22f475981afa2244dd448c6?tpId=13&tqId=11158&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
+func reverseArr(arr []int)[]int{
 
-### 6.[旋转数组的最小数字](http://www.nowcoder.com/practice/9f3231a991af4f55b95579b44b7a01ba?tpId=13&tqId=11159&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
+	for i,j:=0,len(arr)-1;i<=j;i,j=i+1,j-1{
+		arr[i],arr[j]=arr[j],arr[i]
+	}
+	return arr
+}
+```
 
-### 7.[斐波那契数列](http://www.nowcoder.com/practice/c6c7742f5ba7442aada113136ddea0c3?tpId=13&tqId=11160&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
+
+
+### 4.[重建二叉树](https://leetcode-cn.com/problems/zhong-jian-er-cha-shu-lcof/)
+
+> 同[105. 从前序与中序遍历序列构造二叉树](https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/)相同
+
+
+
+### 5.[用两个栈实现队列](https://leetcode-cn.com/problems/yong-liang-ge-zhan-shi-xian-dui-lie-lcof/)
+
+```go
+type CQueue struct {
+  arr []int
+
+}
+
+
+func Constructor() CQueue {
+return CQueue{
+     }
+}
+
+
+func (this *CQueue) AppendTail(value int)  {
+        this.arr=append(this.arr,value)
+}
+
+
+func (this *CQueue) DeleteHead() int {
+    if len(this.arr)==0{
+        return -1
+    }
+        resu:=this.arr[0]
+        this.arr=this.arr[1:]
+        return resu
+}
+```
+
+
+
+### 6.[旋转数组的最小数字](https://leetcode-cn.com/problems/xuan-zhuan-shu-zu-de-zui-xiao-shu-zi-lcof/)
+
+> 二分查找
+
+### 7.[斐波那契数列](https://leetcode-cn.com/problems/fei-bo-na-qi-shu-lie-lcof/)
 
 ```c++
 //我的解法
@@ -157,7 +230,7 @@ int main()
 }
 ```
 
-### 8.[跳台阶](http://www.nowcoder.com/practice/8c82a5b80378478f9484d87d1c5f12a4?tpId=13&tqId=11161&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
+### 8.[跳台阶](https://leetcode-cn.com/problems/qing-wa-tiao-tai-jie-wen-ti-lcof/)
 
 ```c++
 int jumpFloor(int number) {
@@ -169,6 +242,36 @@ int jumpFloor(int number) {
 	}
     }
 ```
+
+Go版本dp解法
+
+```go
+func numWays(n int) int {
+
+    if n==0{
+        return 1
+    }
+    if n==1{
+        return 1
+    }
+
+    if n==2{
+        return 2
+    }
+
+	dp:=make([]int,n+1)
+	dp[0]=0
+	dp[1]=1
+	dp[2]=2
+	for i:=3;i<=n;i++{
+		dp[i]=dp[i-1]+dp[i-2]
+        dp[i]=dp[i]%1000000007
+	}
+	return dp[n]
+}
+```
+
+
 
 ### 9.[变态跳台阶](http://www.nowcoder.com/practice/22243d016f6b47f2a6928b4313c85387?tpId=13&tqId=11162&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
 
@@ -204,7 +307,35 @@ int RectCover(int target) {
     }
 ```
 
-### 11.[二进制中1的个数](http://www.nowcoder.com/practice/8ee967e43c2c4ec193b040ea7fbb10b8?tpId=13&tqId=11164&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
+### 10-1.[剑指 Offer 12. 矩阵中的路径](https://leetcode-cn.com/problems/ju-zhen-zhong-de-lu-jing-lcof/)
+
+### 10-2.[剑指 Offer 13. 机器人的运动范围](https://leetcode-cn.com/problems/ji-qi-ren-de-yun-dong-fan-wei-lcof/)
+
+### 10-3.[剑指 Offer 14- I. 剪绳子](https://leetcode-cn.com/problems/jian-sheng-zi-lcof/)
+
+### 10-4.[剑指 Offer 14- II. 剪绳子 II](https://leetcode-cn.com/problems/jian-sheng-zi-ii-lcof/)
+
+
+
+### 11.[二进制中1的个数](https://leetcode-cn.com/problems/er-jin-zhi-zhong-1de-ge-shu-lcof/)
+
+Go版本
+
+```go
+func hammingWeight(num uint32) int {
+    if num==0{
+        return 0
+    }
+    count:=0
+
+    for ;num>0;num&=num-1{
+        count++
+    }
+    return count
+}
+```
+
+C++
 
 ```c++
 int  NumberOf1(int n) {
@@ -219,7 +350,35 @@ int  NumberOf1(int n) {
      }
 ```
 
-### 12.[数值的整数次方](http://www.nowcoder.com/practice/1a834e5e3e1a4b7ba251417554e07c00?tpId=13&tqId=11165&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
+### 12.[数值的整数次方](https://leetcode-cn.com/problems/shu-zhi-de-zheng-shu-ci-fang-lcof/)
+
+Go版本
+
+```go
+func myPow(x float64, n int) float64 {
+    if n==0{
+        return 1
+    }
+
+    if n==1{
+        return x
+    }
+
+    if n<0{
+        return 1.0/myPow(x,-n)
+    }else{
+        y:=myPow(x,n/2)
+        if n%2==0{
+            return y*y
+        }else{
+            return x*y*y
+        }
+    }
+
+}
+```
+
+
 
 ```c++
 Power(double base, int exponent) {
