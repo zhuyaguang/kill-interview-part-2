@@ -1,6 +1,6 @@
 ## 剑指offer汇总
 
-> 4,6.10-1,10-2,10-3,10-4,12
+> 4,6.10-1,10-2,10-3,10-4,12,17
 
 ### 1.[剑指 Offer 04. 二维数组中的查找](https://leetcode-cn.com/problems/er-wei-shu-zu-zhong-de-cha-zhao-lcof/)
 
@@ -378,7 +378,7 @@ func myPow(x float64, n int) float64 {
 }
 ```
 
-
+C++版本
 
 ```c++
 Power(double base, int exponent) {
@@ -399,10 +399,36 @@ Power(double base, int exponent) {
     }
 ```
 
-### 13.[调整数组顺序使奇数位于偶数前面](http://www.nowcoder.com/practice/beb5aa231adc45b2a5dcc5b62c93f593?tpId=13&tqId=11166&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
+### 13.[调整数组顺序使奇数位于偶数前面](https://leetcode-cn.com/problems/diao-zheng-shu-zu-shun-xu-shi-qi-shu-wei-yu-ou-shu-qian-mian-lcof/)
 
 > 输入一个整数数组，实现一个函数来调整该数组中数字的顺序，使得所有的奇数位于数组的前半部分，所有的偶数位于位于数组的后半部分，并保证奇数和奇数，偶数和偶数之间的相对位置不变。
->
+
+Go版本：
+
+```go
+func exchange(nums []int) []int {
+	n:=len(nums)
+	i:=0
+	j:=n-1
+	for i<j{
+		if nums[i]%2!=0{
+			i++
+			continue
+		}
+		if nums[j]%2==0{
+			j--
+			continue
+		}
+
+		nums[i],nums[j]=nums[j],nums[i]
+	}
+	return nums
+
+}
+
+```
+
+
 
 ```c++
 #include<iostream>
@@ -438,7 +464,7 @@ int main()
  }
 ```
 
-### 14.[链表中倒数第k个结点](http://www.nowcoder.com/practice/529d3ae5a407492994ad2a246518148a?tpId=13&tqId=11167&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
+### 14.[链表中倒数第k个结点](https://leetcode-cn.com/problems/lian-biao-zhong-dao-shu-di-kge-jie-dian-lcof/)
 
 > 输入一个链表，输出该链表中倒数第k个结点。
 >
@@ -496,7 +522,62 @@ ListNode *FindK(ListNode *head,unsigned int k)
 }
 ```
 
-### 15.[反转链表](http://www.nowcoder.com/practice/75e878df47f24fdc9dc3e400ec6058ca?tpId=13&tqId=11168&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
+Go 
+
+```go
+
+func getKthFromEnd(head *ListNode, k int) *ListNode {
+    if k==0{
+        return head
+    }
+    len:=0
+    cur :=head
+    result:=head
+    for cur!=nil{
+        len++
+        cur=cur.Next
+    }
+    index:=len-k
+    for result!=nil&&index>0{
+        index--
+        result=result.Next
+    }
+   return result
+}
+```
+
+
+
+### 15.[反转链表](https://leetcode-cn.com/problems/fan-zhuan-lian-biao-lcof/)
+
+```go
+
+// 迭代法
+
+func reverseList(head *ListNode) *ListNode {
+    var prev *ListNode
+    curr := head
+    for curr != nil {
+        next := curr.Next
+        curr.Next = prev
+        prev = curr
+        curr = next
+    }
+    return prev
+}
+//递归法
+func reverseList(head *ListNode) *ListNode {
+    if head == nil || head.Next == nil {
+        return head
+    }
+    newHead := reverseList(head.Next)
+    head.Next.Next = head
+    head.Next = nil
+    return newHead
+}
+```
+
+
 
 ```c++
 //头插法
@@ -525,9 +606,49 @@ ListNode *ReverseList(ListNode *head)
 }
 ```
 
-### 16.[合并两个排序的链表](http://www.nowcoder.com/practice/d8b6b4358f774294a89de2a6ac4d9337?tpId=13&tqId=11169&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
+### 16.[合并两个排序的链表](https://leetcode-cn.com/problems/he-bing-liang-ge-pai-xu-de-lian-biao-lcof/)
 
 > 递归什么的很难想到，也很难理解
+
+Go:
+
+```go
+func mergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
+	if l1==nil&&l2==nil{
+		return nil
+	}
+	if l1==nil{
+		return l2
+	}
+	if l2==nil{
+		return l1
+	}
+          fake :=&ListNode{
+			  Val:   0,
+		  }
+		  cur :=fake
+		  for l1!=nil&&l2!=nil{
+		  	if l1.Val<l2.Val{
+		  		cur.Next=l1
+		  		l1=l1.Next
+			}else{
+				cur.Next=l2
+				l2=l2.Next
+			}
+            cur=cur.Next
+		  }
+		  if l1==nil{
+		  	cur.Next=l2
+		  }
+		  if l2==nil{
+		  	cur.Next=l1
+		  }
+    return fake.Next
+}
+
+```
+
+
 
 ```C++
 struct ListNode{
@@ -562,10 +683,60 @@ ListNode *merge(ListNode *head1,ListNode *head2)
 }
 ```
 
-### 17.[树的子结构](http://www.nowcoder.com/practice/6e196c44c7004d15b1610b9afca8bd88?tpId=13&tqId=11170&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
+### 17.[树的子结构](https://leetcode-cn.com/problems/shu-de-zi-jie-gou-lcof/)
 
 > 输入两棵二叉树A，B，判断B是不是A的子结构。（ps：我们约定空树不是任意一个树的子结构）
->
+
+```go
+/**
+ * Definition for a binary tree node.
+ * type TreeNode struct {
+ *     Val int
+ *     Left *TreeNode
+ *     Right *TreeNode
+ * }
+ */
+func isSubStructure(A *TreeNode, B *TreeNode) bool {
+    res:=false
+    if A==nil || B==nil{
+        return false
+    }
+    if A.Val==B.Val{
+        res=issub(A,B)
+    }
+    if res!=true{
+ res =isSubStructure(A.Left,B)
+    }
+   
+   if res!=true{
+res =isSubStructure(A.Right,B)
+   }
+    
+
+
+        return res
+}
+
+
+func issub(A *TreeNode, B *TreeNode) bool{
+         if B==nil{
+             return true
+         }
+
+         if A==nil{
+             return false
+         }
+
+         if A.Val!=B.Val{
+             return false
+         }
+
+         return issub(A.Left,B.Left)&&issub(A.Right,B.Right)
+}
+
+```
+
+
 
 ```C++
 #include<iostream>
@@ -633,7 +804,21 @@ bool HasSubtree(TreeNode* pRoot1, TreeNode* pRoot2)
 ### 18.[二叉树的镜像](http://www.nowcoder.com/practice/564f4c26aa584921bc75623e48ca3011?tpId=13&tqId=11171&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
 
 > 操作给定的二叉树，将其变换为源二叉树的镜像。
->
+
+```go
+func mirrorTree(root *TreeNode) *TreeNode {
+    if root==nil{
+    	return nil
+	}
+	left :=mirrorTree(root.Left)
+	right :=mirrorTree(root.Right)
+	root.Right=left
+	root.Left=right
+	return root
+}
+```
+
+
 
 ```c++
 #include<iostream>
