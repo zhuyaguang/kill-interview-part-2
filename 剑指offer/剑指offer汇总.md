@@ -1,6 +1,6 @@
 ## 剑指offer汇总
 
-> 4,6.10-1,10-2,10-3,10-4,12,17
+> 4,6.10-1,10-2,10-3,10-4,12,17,19
 
 ### 1.[剑指 Offer 04. 二维数组中的查找](https://leetcode-cn.com/problems/er-wei-shu-zu-zhong-de-cha-zhao-lcof/)
 
@@ -851,7 +851,49 @@ struct TreeNode {
     }
 ```
 
-### 19.[顺时针打印矩阵](http://www.nowcoder.com/practice/9b4c81a02cd34f76be2659fa0d54342a?tpId=13&tqId=11172&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
+### 19.[顺时针打印矩阵](https://leetcode-cn.com/problems/shun-shi-zhen-da-yin-ju-zhen-lcof/)
+
+```go
+func spiralOrder(matrix [][]int) []int {
+    if len(matrix) == 0 || len(matrix[0]) == 0 {
+        return []int{}
+    }
+    var (
+        rows, columns = len(matrix), len(matrix[0])
+        order = make([]int, rows * columns)
+        index = 0
+        left, right, top, bottom = 0, columns - 1, 0, rows - 1
+    )
+
+    for left <= right && top <= bottom {
+        for column := left; column <= right; column++ {
+            order[index] = matrix[top][column]
+            index++
+        }
+        for row := top + 1; row <= bottom; row++ {
+            order[index] = matrix[row][right]
+            index++
+        }
+        if left < right && top < bottom {
+            for column := right - 1; column > left; column-- {
+                order[index] = matrix[bottom][column]
+                index++
+            }
+            for row := bottom; row > top; row-- {
+                order[index] = matrix[row][left]
+                index++
+            }
+        }
+        left++
+        right--
+        top++
+        bottom--
+    }
+    return order
+}
+```
+
+
 
 ```c++
 #include<iostream>
@@ -896,7 +938,48 @@ int printMatrix(int** numbers,int columns,int rows){
 ### 20.[包含min函数的栈](http://www.nowcoder.com/practice/4c776177d2c04c2494f2555c9fcc1e49?tpId=13&tqId=11173&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
 
 > 定义栈的数据结构，请在该类型中实现一个能够得到栈最小元素的min函数。
->
+
+```go
+type MinStack struct {
+    stack []int
+    minStack []int
+}
+
+func Constructor() MinStack {
+    return MinStack{
+        stack: []int{},
+        minStack: []int{math.MaxInt64},
+    }
+}
+
+func (this *MinStack) Push(x int)  {
+    this.stack = append(this.stack, x)
+    top := this.minStack[len(this.minStack)-1]
+    this.minStack = append(this.minStack, min(x, top))
+}
+
+func (this *MinStack) Pop()  {
+    this.stack = this.stack[:len(this.stack)-1]
+    this.minStack = this.minStack[:len(this.minStack)-1]
+}
+
+func (this *MinStack) Top() int {
+    return this.stack[len(this.stack)-1]
+}
+
+func (this *MinStack) Min() int {
+    return this.minStack[len(this.minStack)-1]
+}
+
+func min(x, y int) int {
+    if x < y {
+        return x
+    }
+    return y
+}
+```
+
+
 
 ```C++ 
  stack<int> m_data, m_min;
