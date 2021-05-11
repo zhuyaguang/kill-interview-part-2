@@ -1,6 +1,6 @@
 ## 剑指offer汇总
 
-> 4,6.10-1,10-2,10-3,10-4,12,17,19
+> 4,6.10-1,10-2,10-3,10-4,12,17,19,23,24,25
 
 ### 1.[剑指 Offer 04. 二维数组中的查找](https://leetcode-cn.com/problems/er-wei-shu-zu-zhong-de-cha-zhao-lcof/)
 
@@ -85,45 +85,6 @@ func replaceSpace(s string) string {
 		}
 	}
 	return res.String()
-}
-```
-
-C++版本
-
-```c++
-#include <iostream>
-#include <vector>
-#include <sstream>
-using namespace std;
-
-int main()
-{
-    vector<string> a;
-    string s;
-    getline(cin,s);
-    
-    for (int i = 0; i<s.length(); i++) {
-        stringstream stream;
-        stream << s[i];
-        string tep = stream.str();
-        a.push_back(tep);
-    }
-    
-    
-    int len = int(a.size()-1);
-    
-    for (int  i = 0; i<len; i++) {
-        if(a[i] == " ")
-        {
-            a[i] = "%20";
-        }
-    }
-    
-     for (int  i = 0; i<=len; i++) {
-         cout<<a[i];
-     }
-    
-    return 0;
 }
 ```
 
@@ -335,24 +296,9 @@ func hammingWeight(num uint32) int {
 }
 ```
 
-C++
 
-```c++
-int  NumberOf1(int n) {
-         int count =0;
-         while(n)
-             {
-             count++;
-             n=n&(n-1);
-             
-         }
-         return count;
-     }
-```
 
 ### 12.[数值的整数次方](https://leetcode-cn.com/problems/shu-zhi-de-zheng-shu-ci-fang-lcof/)
-
-Go版本
 
 ```go
 func myPow(x float64, n int) float64 {
@@ -378,32 +324,9 @@ func myPow(x float64, n int) float64 {
 }
 ```
 
-C++版本
-
-```c++
-Power(double base, int exponent) {
-        double r=1;
-        if (exponent==0){return 1;}
-        if(exponent<0)
-        {
-            base=1/base;
-            exponent=-1*exponent;
-        }
-        while(exponent>0)
-        {
-            r = r*base;
-            exponent--;
-        }
-        return r;
-     
-    }
-```
-
 ### 13.[调整数组顺序使奇数位于偶数前面](https://leetcode-cn.com/problems/diao-zheng-shu-zu-shun-xu-shi-qi-shu-wei-yu-ou-shu-qian-mian-lcof/)
 
 > 输入一个整数数组，实现一个函数来调整该数组中数字的顺序，使得所有的奇数位于数组的前半部分，所有的偶数位于位于数组的后半部分，并保证奇数和奇数，偶数和偶数之间的相对位置不变。
-
-Go版本：
 
 ```go
 func exchange(nums []int) []int {
@@ -430,40 +353,6 @@ func exchange(nums []int) []int {
 
 
 
-```c++
-#include<iostream>
-using namespace std;
-
-int main()
-{
-	
-	int num[8] = {1,2,8,9,4,7,11,6};
-	int len = sizeof(num)/sizeof(num[0]);
-	int *begin = num;
-	int *end = num+len-1;
-
-	while(begin < end)
-	{
-		while(begin < end && *begin % 2 != 0)
-			begin++;
-		while(begin < end && *end %2 ==0)
-			end--;
-		if(begin < end)
-		{
-			int temp = *begin;
-			*begin = *end;
-			*end = temp;
-		}
-	}
-	for(int i =0 ;i< len ;i++)
-	{
-	cout<<num[i];
-	}
-		
-		system("pause");
- }
-```
-
 ### 14.[链表中倒数第k个结点](https://leetcode-cn.com/problems/lian-biao-zhong-dao-shu-di-kge-jie-dian-lcof/)
 
 > 输入一个链表，输出该链表中倒数第k个结点。
@@ -471,58 +360,9 @@ int main()
 
 
 
-> 第一个指针先走k步,第二个指针开始走，当第一个指针走到尽头的时候，第二个指针就是倒数第K个结点
+1.第一个指针先走k步,第二个指针开始走，当第一个指针走到尽头的时候，第二个指针就是倒数第K个结点
 
-```c++
-struct ListNode {
-    int val;
-    struct ListNode *next;
-    ListNode(int x) :
-            val(x), next(NULL) {
-    }
-
-
-ListNode *FindK(ListNode *head,unsigned int k)
-{
-	if (head == NULL || k == 0)
-	{
-		return NULL;
-	}
-
-	ListNode *Node = head;
-	ListNode *pHeadNode = head;
-	ListNode *pFollowNode = head;
-	int len ;
-	while(pNode)
-	{
-		len++;
-		pNode->next;
-	}
-	if (k>len)
-	{
-		return NULL;
-	}
-
-	for (int i = 0; i < k-1; ++i)
-	{
-		if (pHeadNode->next != NULL)
-		{
-			pHeadNode = pHeadNode->next;
-		}
-		
-	}
-
-	while(pHeadNode->next)
-	{
-		pHeadNode = pHeadNode->next;
-		pFollowNode = pFollowNode->next;
-	}
-
-	return pFollowNode;
-}
-```
-
-Go 
+2.
 
 ```go
 
@@ -579,33 +419,6 @@ func reverseList(head *ListNode) *ListNode {
 
 
 
-```c++
-//头插法
-//
-struct ListNode{
-	int value;
-	ListNode *next;
-}
-
-ListNode *ReverseList(ListNode *head)
-{
-	ListNode *newHead = head;
-	head = head ->next;
-
-	newHead ->next = NULL;
-
-	while (head) {
-            ListNode *next = head->next;
-            head->next = newHead;
-            newHead = head;
-            head = next;
-        }
-        
-        return newHead;
-
-}
-```
-
 ### 16.[合并两个排序的链表](https://leetcode-cn.com/problems/he-bing-liang-ge-pai-xu-de-lian-biao-lcof/)
 
 > 递归什么的很难想到，也很难理解
@@ -646,41 +459,6 @@ func mergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
     return fake.Next
 }
 
-```
-
-
-
-```C++
-struct ListNode{
-	int value;
-	ListNode *next;
-}
-
-ListNode *merge(ListNode *head1,ListNode *head2)
-{
-	if (head1 == NULL)
-	{
-		return head2;
-	}
-
-	if (head2 == NULL)
-	{
-		return head1;
-	}
-	ListNode *newHead == NULL;
-
-	if (head1 -> value < head2 ->value)
-	{
-		newHead = head1;
-
-		newHead ->next = merge(head1->next,head2);
-	}else {
-		newHead = head2;
-		newHead ->next = merge(head2->next,head1);
-	}
-
-	return newHead;
-}
 ```
 
 ### 17.[树的子结构](https://leetcode-cn.com/problems/shu-de-zi-jie-gou-lcof/)
@@ -738,69 +516,6 @@ func issub(A *TreeNode, B *TreeNode) bool{
 
 
 
-```C++
-#include<iostream>
-using namespace std;
-
-struct TreeNode {
-	int val;
-	struct TreeNode *left;
-	struct TreeNode *right;
-	}
-
-bool isSubTree(TreeNode* pRoot1, TreeNode* pRoot2){
-	if (pRoot2 == NULL)
-	{
-		return true;
-	}
-
-	if (pRoot1 == NULL && pRoot2 == NULL)
-	{
-		return false;
-	}
-
-	if (pRoot1->val == pRoot2->val)
-	{
-		return isSubTree(pRoot1->left,pRoot2->left) && isSubTree(pRoot1->right,pRoot2->right);
-	}
-	else return false;
-}
-
-
-//第一步寻找1中是否有2根节点一样值的点
-bool HasSubtree(TreeNode* pRoot1, TreeNode* pRoot2)
-{
-    		bool flag = false;
-
-    if (pRoot2 == NULL)
-	{
-		return false;
-	}
-
-	if (pRoot1 == NULL && pRoot2 != NULL)
-	{
-		return false;
-	}
-
-	if (pRoot1->val == pRoot2->val)
-	{
-		//找到值一样的点后，就判断结构是不是一样
-		flag = isSubTree(pRoot1,pRoot2);
-	}
-
-	if (!flag)
-	{
-		flag = HasSubtree(pRoot1->left,pRoot2);
-	}
-	if (!flag)
-	{
-		flag = HasSubtree(pRoot1->right,pRoot2);
-	}
-
-	return flag;
-}
-```
-
 ### 18.[二叉树的镜像](http://www.nowcoder.com/practice/564f4c26aa584921bc75623e48ca3011?tpId=13&tqId=11171&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
 
 > 操作给定的二叉树，将其变换为源二叉树的镜像。
@@ -816,39 +531,6 @@ func mirrorTree(root *TreeNode) *TreeNode {
 	root.Left=right
 	return root
 }
-```
-
-
-
-```c++
-#include<iostream>
-using namespace std;
-
-struct TreeNode {
-    int val;
-    struct TreeNode *left;
-    struct TreeNode *right;
-    }
-
-   void Mirror(TreeNode *pRoot) {
-        
-          if(pRoot == NULL){
-            return ;
-        }
-         
-        TreeNode *temp = pRoot->left;
-        pRoot->left = pRoot->right;
-        pRoot->right = temp;
-         
-        if(pRoot->left){
-            Mirror(pRoot->left);
-        }
-         
-        if(pRoot->right){
-            Mirror(pRoot->right);
-        }
-
-    }
 ```
 
 ### 19.[顺时针打印矩阵](https://leetcode-cn.com/problems/shun-shi-zhen-da-yin-ju-zhen-lcof/)
@@ -890,48 +572,6 @@ func spiralOrder(matrix [][]int) []int {
         bottom--
     }
     return order
-}
-```
-
-
-
-```c++
-#include<iostream>
-using namespace std;
-
-int printMatrix(int** numbers,int columns,int rows){
-	//定义四个关键变量来定义打印的范围
-	
-	int left = 0,right = columns -1,top = 0,button = rows -1;
-
-	while(left <= right && top <= button)
-	{
-		//左到右
-		for (int i = left; i <= right; ++i)
-		{
-			cout<<numbers[top][i];
-		}
-		//上到下
-		for (int i = top+1; i <= button; ++i)
-		{
-			cout<<numbers[right][i];	
-		}
-		//右到左
-		if (top != button)
-		
-		for (int i = right-1; i >= left; --i)
-		{
-			cout<<numbers[button][i];
-		}
-		//下到上
-		if (left != right)
-		for (int i = button-1; i >= top+1; --i)
-		{
-			cout<<numbers[left][i];
-		}
-
-		left++;right--;top++;button--;
-	} 
 }
 ```
 
@@ -979,237 +619,351 @@ func min(x, y int) int {
 }
 ```
 
-
-
-```C++ 
- stack<int> m_data, m_min;
-     
-    void push(int value) {
-        m_data.push(value);
-        if(m_min.size() == 0 || m_min.top() > value){
-            m_min.push(value);
-        }else {
-            m_min.push(m_min.top());
-        }
-    }
-    void pop() {
-        assert(m_data.size() >0 && m_min.size() > 0);
-        m_data.pop();
-        m_min.pop();
-    }
-    int top() {
-        assert(m_data.size() > 0 && m_min.size() > 0);
-        return m_data.top();
-    }
-    int min() {
-        assert(m_data.size() > 0 && m_min.size() > 0);
-        return m_min.top();
-    }
-```
-
-### 21.[栈的压入、弹出序列](http://www.nowcoder.com/practice/d77d11405cc7470d82554cb392585106?tpId=13&tqId=11174&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
+### 21.[栈的压入、弹出序列](https://leetcode-cn.com/problems/zhan-de-ya-ru-dan-chu-xu-lie-lcof/)
 
 > 输入两个整数序列，第一个序列表示栈的压入顺序，请判断第二个序列是否为该栈的弹出顺序。假设压入栈的所有数字均不相等。例如序列1,2,3,4,5是某栈的压入顺序，序列4，5,3,2,1是该压栈序列对应的一个弹出序列，但4,3,5,1,2就不可能是该压栈序列的弹出序列。（注意：这两个序列的长度是相等的）
->
 
-```C++
-bool isPopOrder(int pushStack[],int popList[])
-{
-	if (pushStack.length == 0 || popList.length == 0)
-	{
-		return false;
-	}
+```go
+func validateStackSequences(pushed []int, popped []int) bool {
+	stackA:=[]int{}
 
-	Stack<int> stack  = new Stack<int>();
-	int j = 0;
-	for (int i = 0; i < pushStack.length; ++i)
-	{
-		stack.push(pushStack[i]);
+	for _,v:=range pushed{
+		stackA=append(stackA,v)
 
-		while(j<pushStack.length && pushStack.top ==popList[j])
-		{
-			pushStack.pop();
-			j++;
+
+		for  stackA[len(stackA)-1]==popped[0]{
+
+				stackA=stackA[:len(stackA)-1]
+				popped=popped[1:]
+				if len(stackA)==0{
+					break
+				}
+
 		}
 	}
+	return  len(stackA)==0
+
 }
 ```
 
 ### 22.[从上往下打印二叉树](http://www.nowcoder.com/practice/7fe2212963db4790b57431d9ed259701?tpId=13&tqId=11175&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
 
 > 从上往下打印出二叉树的每个节点，同层节点从左至右打印。
->
 
-```c++
-//借助一个队列，先将头节点放进去 把节点值放到数组，出队列。再将节点左右节点压入队列。
-
-
-struct TreeNode {
-	int val;
-	struct TreeNode *left;
-	struct TreeNode *right;
-	}
-
-vector<int> PrintFromTopToBottom(TreeNode *root) {
-
-	queue<TreeNode*> queue;
-	vector<int> r;
-	q.push(root);
-
-	while(!q.empty()){
-		TreeNode *node = q.frount();
-		q.pop();
-		
-
-		if (!node)
-		{
-			continue;
+```go
+func levelOrder(root *TreeNode) []int {
+        if root==nil{
+        	return []int{}
+		}
+		result:=[]int{}
+		queue :=[]*TreeNode{root}
+		for len(queue)>0{
+			index:=len(queue)
+			for i:=0;i<index;i++{
+                if queue[i]!=nil{
+result=append(result,queue[i].Val)
+				queue=append(queue,queue[i].Left)
+				queue=append(queue,queue[i].Right)
+                }
+				
+			}
+			queue=queue[index:]
 		}
 
-		r.push_back(node->value);
-		q.push(node->left);
-		q.push(node->right);
+		return result
+}
 
-	}
-
-	return r;
-
-    }
 ```
 
-### 23.[二叉搜索树的后序遍历序列](http://www.nowcoder.com/practice/a861533d45854474ac791d90e447bafd?tpId=13&tqId=11176&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
+### 22-1.[剑指 Offer 32 - II. 从上到下打印二叉树 II](https://leetcode-cn.com/problems/cong-shang-dao-xia-da-yin-er-cha-shu-ii-lcof/)
 
-```c++
-bool judge(int a[],int l,int r){
-	if (l>=r)
-	{
-		return true;
+```go
+func levelOrder(root *TreeNode) [][]int {
+	var queue []*TreeNode
+	var result [][]int
+	if root == nil{
+		return [][]int{
+		}
 	}
+	queue =append(queue,root)
 
-	int i = r;
-	while (i>1 && a[i-1] > a[r]) --i;
 
-		for (int j = i-1; j >1; j--)
-		{
-			if (a[j] > a[r])
-			{
-				return false;
+	for len(queue)>0{
+		tmp:=[]int{}
+        count:=len(queue)
+		for i:=0;i<count;i++{
+			if queue[i]!=nil{
+				tmp=append(tmp,queue[i].Val)
+				queue=append(queue,queue[i].Left)
+				queue=append(queue,queue[i].Right)
 			}
 
-			return judge(a,l,i-1) && judge(a,i,r-1);
 		}
+        if len(tmp)!=0{
+result=append(result,tmp)
+        }
+		
+		queue=queue[count:]
+
+	}
+	return result
 }
 
- bool VerifySquenceOfBST(int a[]) {
-        if(!a.size()) return false;
-
-        return judge(a, 0, a.size() - 1);
-   }
 ```
 
-### 24.[二叉树中和为某一值的路径](http://www.nowcoder.com/practice/b736e784e3e34731af99065031301bca?tpId=13&tqId=11177&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
+### 22-2.[剑指 Offer 32 - III. 从上到下打印二叉树 III](https://leetcode-cn.com/problems/cong-shang-dao-xia-da-yin-er-cha-shu-iii-lcof/)
 
-```c++
-vector<vector<int>> allRes;
-vector<int> tmp;
-
-void  dfsFind(TreeNode *node,int left){
-	temp.push_back(node->value);
-	if (left-node->value == 0 && node->left == NULL && node->right == NULL)
-	{
-		allRes.push_back(tmp);
-	}else {
-		if (node->left != NULL)
-		{
-			dfsFind(node->left,left-node->value);
+```go
+func levelOrder(root *TreeNode) [][]int {
+      if root==nil{
+        	return [][]int{}
+		}
+		result:=[][]int{}
+		queue :=[]*TreeNode{root}
+		for len(queue)>0{
+			index:=len(queue)
+			tmp:=[]int{}
+			for i:=0;i<index;i++{
+                if queue[i]!=nil{
+	            tmp=append(tmp,queue[i].Val)
+				queue=append(queue,queue[i].Left)
+				queue=append(queue,queue[i].Right)
+                }
+			
+			}
+            if len(tmp)!=0{
+                result=append(result,tmp)
+            }
+			
+			queue=queue[index:]
 		}
 
-		if (node->right != NULL)
-		{
-			dfsFind(node->right,left-node->value);
+        	i:=1
+		for ;i<len(result);i=i+2{
+			revert(result[i])
+		}
+
+		return result
+}
+
+func revert(nums []int)  {
+     i:=0
+     j:=len(nums)-1
+     for i<j{
+     	nums[i],nums[j]=nums[j],nums[i]
+     	i++
+     	j--
+	 }
+}
+```
+
+
+
+### 23.[二叉搜索树的后序遍历序列](https://leetcode-cn.com/problems/er-cha-sou-suo-shu-de-hou-xu-bian-li-xu-lie-lcof/)
+
+```go
+func verifyPostorder(postorder []int) bool {
+	n:=len(postorder)
+	if n==0{
+		return true
+	}
+	root :=postorder[n-1]
+	index:=-1
+	for i:=0;i<n-1;i++{
+		if postorder[i]>root{
+			index=i
+			break
 		}
 	}
+	if index!=-1{
+		for i:=index;i<n-1;i++{
+			if postorder[i]<root{
+				return false
+			}
+		}
+	}
+	if index==-1{
+		return verifyPostorder(postorder[:n-1])
+	}
+
+	return verifyPostorder(postorder[:index])&&verifyPostorder(postorder[index:n-1])
 }
 
- vector<vector<int> > FindPath(TreeNode* root,int expectNumber) {
- 				if (root)
- 				{
- 					dfsFind(root,expectNumber);
- 				}
-
- 				return allRes;
-    }
 ```
 
-### 25.[复杂链表的复制](http://www.nowcoder.com/practice/f836b2c43afc4b35ad6adc41ec941dba?tpId=13&tqId=11178&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
+### 24.[二叉树中和为某一值的路径](https://leetcode-cn.com/problems/er-cha-shu-zhong-he-wei-mou-yi-zhi-de-lu-jing-lcof/)
+
+```go
+var trace []int
+var result [][]int
+func pathSum(root *TreeNode, target int) [][]int {
+	trace=[]int{}
+	result=[][]int{}
+	if root==nil{
+		return result
+	}
+	dfs1(root,trace,target)
+
+   return result
+}
+
+func dfs1(root *TreeNode,trace []int,tar int)  {
+    if root==nil{
+        return
+    }
+    trace=append(trace,root.Val)
+    tar=tar-root.Val
+	if tar==0&&root.Left==nil&&root.Right==nil{
+		tmp:=make([]int,len(trace))
+		copy(tmp,trace)
+		result=append(result,tmp)
+		return
+	}
+	
+    dfs1(root.Left,trace,tar)
+	dfs1(root.Right,trace,tar)
+	trace=trace[:len(trace)-1]
+
+}
+
+```
+
+### 25.[复杂链表的复制](https://leetcode-cn.com/problems/fu-za-lian-biao-de-fu-zhi-lcof/)
 
 > 输入一个复杂链表（每个节点中有节点值，以及两个指针，一个指向下一个节点，另一个特殊指针指向任意一个节点），返回结果为复制后复杂链表的head。（注意，输出结果中请不要返回参数中的节点引用，否则判题程序会直接返回空）
 >
 
-```c++
-//分三步走，1.复制next节点放在原链表后面2.复制随机节点，按照原链表的顺序3.把两个链表分开
-
- RandomListNode* Clone(RandomListNode* pHead)
-    {
-    	//1
-        RandomListNode* currentNode = pHead;
-        while(currentNode)
-        {
-        	RandomListNode *node = new RandomListNode(currentNode->label);
-        	node->next = currentNode->next;
-        	currentNode->next = node;
-        	currentNode = node->next;
-        }
-        //2
-        currentNode = pHead;
-
-        while(currentNode->random)
-        {
-        	currentNode->next->random=currentNode->random->next;
-        	currentNode = currentNode->next->next;
-        }
-
-        //3
-        RandomListNode* copyHead = pHead->next;
-
-        currentNode = pHead;
-
-        RandomListNode *tmp;
-
-        while(currentNode->next){
-        	tmp = currentNode ->next;
-        	currentNode->next = tmp->next;
-        	currentNode = tmp;
-        }
-
-        return copyHead;
-    }
+```go
+func copyRandomList(head *Node) *Node {
+     nMap:=make(map[*Node]*Node)
+     cur :=head
+     next:=head
+     for cur!=nil{
+     	tmp:=&Node{
+			Val:    cur.Val,
+		}
+     	nMap[cur]=tmp
+     	cur=cur.Next
+	 }
+	 for next!=nil{
+	 	nMap[next].Random=nMap[next.Random]
+		nMap[next].Next=nMap[next.Next]
+        next=next.Next
+	 }
+	 return nMap[head]
+}
 ```
 
-### 26.[二叉搜索树与双向链表](http://www.nowcoder.com/practice/947f6eb80d944a84850b0538bf0ec3a5?tpId=13&tqId=11179&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
+### 26.[二叉搜索树与双向链表](https://leetcode-cn.com/problems/er-cha-sou-suo-shu-yu-shuang-xiang-lian-biao-lcof/)
 
-### 27.[字符串的排列](http://www.nowcoder.com/practice/fe6b651b66ae47d7acce78ffdd9a96c7?tpId=13&tqId=11180&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
+```go
+type TreeNode struct {
+	Val   int
+	Left  *TreeNode
+	Right *TreeNode
+}
 
-### 28.[数组中出现次数超过一半的数字](http://www.nowcoder.com/practice/e8a1b01a2df14cb2b228b30ee6a92163?tpId=13&tqId=11181&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
+var pre *TreeNode
+var head *TreeNode
 
-```c++
-#include <iostream>
-using namespace std;
+func treeToDoublyList(root *TreeNode) *TreeNode {
+	if root == nil {
+		return nil
+	}
+	pre = nil
+	head = nil
+	convert(root)
+	pre.Right = head
+	head.Left = pre
+	return head
+}
 
-int main(){
-    int num[13]={1,2,3,4,4,4,4,4,4,4,5,6,7};
-    
-    int index[10]={0};
-    
-    for (int i = 0; i<13; i++) {
-        index[num[i]]++;
+func convert(root *TreeNode) {
+	if root == nil {
+		return
+	}
+	convert(root.Left)
+	if pre == nil {
+		head = root
+	}else {
+		pre.Right = root
+		root.Left = pre
+	}
+	pre = root
+	convert(root.Right)
+}
+```
+
+
+
+### 27.[字符串的排列](https://leetcode-cn.com/problems/zi-fu-chuan-de-pai-lie-lcof/)
+
+```go
+var resultS []string
+var traces string
+func permutation(s string) []string {
+	if len(s) == 0 {
+		return nil
+	}
+     resultS=[]string{}
+     traces = ""
+     stringArr :=[]string{}
+     for _,v:=range s{
+     	stringArr = append(stringArr,string(v))
+	 }
+	 sort.Strings(stringArr)
+     visit :=make([]bool,len(stringArr))
+
+	backtracks(stringArr,traces,visit)
+
+	return resultS
+}
+
+func backtracks(s []string ,traces string,visit []bool)  {
+	if len(traces)==len(s){
+		resultS=append(resultS,traces)
+		return
+	}
+	for i:=0;i<len(s);i++{
+		if i>0 && !visit[i-1] && s[i]==s[i-1]{
+			continue
+		}
+		if visit[i]{
+			continue
+		}
+
+			traces=traces+s[i]
+			visit[i]=true
+			backtracks(s,traces,visit)
+			traces=traces[:len(traces)-1]
+			visit[i]=false
+	}
+}
+
+```
+
+
+
+### 28.[数组中出现次数超过一半的数字](https://leetcode-cn.com/problems/shu-zu-zhong-chu-xian-ci-shu-chao-guo-yi-ban-de-shu-zi-lcof/)
+
+```go
+func majorityElement(nums []int) int {
+    n:=len(nums)
+    target:=0
+    if n%2==0{
+           target=n/2
+    }else{
+        target=n/2+1
     }
-    
-    for (int i = 0; i<10; i++) {
-        if (index[i] > 13 /2 ) {
-            cout<<i;
+    rMap:=make(map[int]int)
+    for _,v:=range nums{
+        rMap[v]++
+        if rMap[v]==target{
+            return v
         }
     }
+    return 0
+
 }
 ```
 
@@ -1242,6 +996,52 @@ public ArrayList<Integer> GetLeastNumbers_Solution(int [] input, int k) {
 	return ret;
 }
 ```
+
+大根堆
+
+```go
+func getLeastNumbers(arr []int, k int) []int {
+	if len(arr) == 0 || k == 0 {
+		return nil
+	}
+
+	// 建堆，大根堆
+	d := &heapInt{}
+	for _, v := range arr {
+		if d.Len() < k {
+			heap.Push(d, v)
+		} else {
+			if d.Peek() > v {
+				heap.Pop(d)
+				heap.Push(d, v)
+			}
+		}
+	}
+	return d.IntSlice
+
+}
+
+type heapInt struct {
+	sort.IntSlice
+}
+
+func (h *heapInt)Less(i,j int)bool {return h.IntSlice[i]>h.IntSlice[j]}
+
+func (h *heapInt) Push(x interface{}) {
+	h.IntSlice = append(h.IntSlice, x.(int))
+}
+func (h *heapInt) Pop() interface{} {
+	a := h.IntSlice
+	t := a[len(a)-1]
+	h.IntSlice = a[:len(a)-1]
+	return t
+}
+func (h *heapInt) Peek() int {
+	return h.IntSlice[0]
+}
+```
+
+
 
 ### 30.[连续子数组的最大和](http://www.nowcoder.com/practice/459bd355da1549fa8a49e350bf3df484?tpId=13&tqId=11183&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
 
