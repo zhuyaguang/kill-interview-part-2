@@ -251,7 +251,6 @@ int jumpFloorII(int number) {
 ### 10.[矩形覆盖](http://www.nowcoder.com/practice/72a5a919508a4251859fb2cfb987a0e6?tpId=13&tqId=11163&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
 
 > 我们可以用2*1的小矩形横着或者竖着去覆盖更大的矩形。请问用n个2*1的小矩形无重叠地覆盖一个2*n的大矩形，总共有多少种方法？
->
 
 ```c++
 int RectCover(int target) {
@@ -267,10 +266,6 @@ int RectCover(int target) {
         }
     }
 ```
-
-### 10-1.[剑指 Offer 12. 矩阵中的路径](https://leetcode-cn.com/problems/ju-zhen-zhong-de-lu-jing-lcof/)
-
-### 10-2.[剑指 Offer 13. 机器人的运动范围](https://leetcode-cn.com/problems/ji-qi-ren-de-yun-dong-fan-wei-lcof/)
 
 ### 10-3.[剑指 Offer 14- I. 剪绳子](https://leetcode-cn.com/problems/jian-sheng-zi-lcof/)
 
@@ -356,7 +351,6 @@ func exchange(nums []int) []int {
 ### 14.[链表中倒数第k个结点](https://leetcode-cn.com/problems/lian-biao-zhong-dao-shu-di-kge-jie-dian-lcof/)
 
 > 输入一个链表，输出该链表中倒数第k个结点。
->
 
 
 
@@ -675,89 +669,7 @@ result=append(result,queue[i].Val)
 
 ```
 
-### 22-1.[剑指 Offer 32 - II. 从上到下打印二叉树 II](https://leetcode-cn.com/problems/cong-shang-dao-xia-da-yin-er-cha-shu-ii-lcof/)
-
-```go
-func levelOrder(root *TreeNode) [][]int {
-	var queue []*TreeNode
-	var result [][]int
-	if root == nil{
-		return [][]int{
-		}
-	}
-	queue =append(queue,root)
-
-
-	for len(queue)>0{
-		tmp:=[]int{}
-        count:=len(queue)
-		for i:=0;i<count;i++{
-			if queue[i]!=nil{
-				tmp=append(tmp,queue[i].Val)
-				queue=append(queue,queue[i].Left)
-				queue=append(queue,queue[i].Right)
-			}
-
-		}
-        if len(tmp)!=0{
-result=append(result,tmp)
-        }
-		
-		queue=queue[count:]
-
-	}
-	return result
-}
-
-```
-
-### 22-2.[剑指 Offer 32 - III. 从上到下打印二叉树 III](https://leetcode-cn.com/problems/cong-shang-dao-xia-da-yin-er-cha-shu-iii-lcof/)
-
-```go
-func levelOrder(root *TreeNode) [][]int {
-      if root==nil{
-        	return [][]int{}
-		}
-		result:=[][]int{}
-		queue :=[]*TreeNode{root}
-		for len(queue)>0{
-			index:=len(queue)
-			tmp:=[]int{}
-			for i:=0;i<index;i++{
-                if queue[i]!=nil{
-	            tmp=append(tmp,queue[i].Val)
-				queue=append(queue,queue[i].Left)
-				queue=append(queue,queue[i].Right)
-                }
-			
-			}
-            if len(tmp)!=0{
-                result=append(result,tmp)
-            }
-			
-			queue=queue[index:]
-		}
-
-        	i:=1
-		for ;i<len(result);i=i+2{
-			revert(result[i])
-		}
-
-		return result
-}
-
-func revert(nums []int)  {
-     i:=0
-     j:=len(nums)-1
-     for i<j{
-     	nums[i],nums[j]=nums[j],nums[i]
-     	i++
-     	j--
-	 }
-}
-```
-
-
+### 
 
 ### 23.[二叉搜索树的后序遍历序列](https://leetcode-cn.com/problems/er-cha-sou-suo-shu-de-hou-xu-bian-li-xu-lie-lcof/)
 
@@ -831,7 +743,6 @@ func dfs1(root *TreeNode,trace []int,tar int)  {
 ### 25.[复杂链表的复制](https://leetcode-cn.com/problems/fu-za-lian-biao-de-fu-zhi-lcof/)
 
 > 输入一个复杂链表（每个节点中有节点值，以及两个指针，一个指向下一个节点，另一个特殊指针指向任意一个节点），返回结果为复制后复杂链表的head。（注意，输出结果中请不要返回参数中的节点引用，否则判题程序会直接返回空）
->
 
 ```go
 func copyRandomList(head *Node) *Node {
@@ -967,35 +878,9 @@ func majorityElement(nums []int) int {
 }
 ```
 
-### 29.[最小的K个数](http://www.nowcoder.com/practice/6a296eb82cf844ca8539b57c23e6e9bf?tpId=13&tqId=11182&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
+### 29.[最小的K个数](https://leetcode-cn.com/problems/zui-xiao-de-kge-shu-lcof/)
 
 > 输入n个整数，找出其中最小的K个数。例如输入4,5,1,6,2,7,3,8这8个数字，则最小的4个数字是1,2,3,4,。
->
-
-```c++
-//冒泡排序，只排前K个数
-
-public ArrayList<Integer> GetLeastNumbers_Solution(int [] input, int k) {
-	ArrayList<Integer> ret = new ArrayList<Integer>();
-
-	for (int i = 0; i < K; ++i)
-	{
-		for (int j = 0; j < input.length-i-1; ++j)
-		{
-			if (j[i+1]>j[i])
-			{
-				int temp = j[i+1];
-				j[i+1] = j[i];
-				j[i] = temp;
-			}
-
-			ret.add(input[input.length-i-1]);
-		}
-	}
-
-	return ret;
-}
-```
 
 大根堆
 
@@ -1041,751 +926,212 @@ func (h *heapInt) Peek() int {
 }
 ```
 
+### 30.[连续子数组的最大和](https://leetcode-cn.com/problems/lian-xu-zi-shu-zu-de-zui-da-he-lcof/)
 
-
-### 30.[连续子数组的最大和](http://www.nowcoder.com/practice/459bd355da1549fa8a49e350bf3df484?tpId=13&tqId=11183&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
-
-```c++
-int FindGreatestSumOfSubArray(vector<int> array) {
-
-		int curSum =0;
-		int GreatSum =0x80000000;
-		for (int i = 0; i < array.length; ++i)
-		{
-			if (array[i] <= 0)
-			{
-				curSum = array[i];
-			}else{
-				curSum = curSum+array[i];
-			}
-
-			if (curSum > GreatSum)
-			{
-				GreatSum = curSum;
-			}
-		}
-
-		return GreatSum;
-
-}
-```
-
-### 31.[整数中1出现的次数（从1到n整数中1出现的次数）](http://www.nowcoder.com/practice/bd7f978302044eee894445e244c7eee6?tpId=13&tqId=11184&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
-
-```c++
-int find_1_num(int n){
-for (int i = 1; i < n; ++i)
-{
-	int count = 0;
-
-	while(i){
-		if (i % 10 == 1)
-		{
-			count++;
-		}
-		i = i/10;
-	}
-
-
-}
-
-return count;
-}
-```
-
-### 32.[把数组排成最小的数](http://www.nowcoder.com/practice/8fecd3f8ba334add803bf2a06af1b993?tpId=13&tqId=11185&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
-
-```c++
- // * 解题思路：
- // * 先将整型数组转换成String数组，然后将String数组排序，最后将排好序的字符串数组拼接出来。关键就是制定排序规则。
- // * 排序规则如下：
- // * 若ab > ba 则 a > b，
- // * 若ab < ba 则 a < b，
- // * 若ab = ba 则 a = b；
- // * 解释说明：
- // * 比如 "3" < "31"但是 "331" > "313"，所以要将二者拼接起来进行比较
-static bool compare(const string str1,const string str2)
-{
-    string combined1,combined2;
-    combined1=str1+str2;
-    combined2=str2+str1;
-    return combined1<combined2;
-}
-string PrintMinNumber(vector<int> numbers){
-     
-    vector<string> strvec;
-    for (int i=0;i<numbers.size();i++)
-    {
-        string str;
-        //stringstream由iostream派生而来
-        stringstream ss;
-        ss<<numbers[i];
-        ss>>str;
-        strvec.push_back(str); 
+```go
+func maxSubArray(nums []int) int {
+    if len(nums) == 1{
+        return nums[0]
     }
- 
-    sort(strvec.begin(),strvec.end(),compare);
- 
-    string orderStr;
-    for (int i=0;i<strvec.size();i++)
-    {
-        str.append(strvec[i]);
-    }
-    return orderStr;
- 
-}
-```
-
-### 33.[丑数](http://www.nowcoder.com/practice/6aa9e04fc3794f68acf8778237ba065b?tpId=13&tqId=11186&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
-
-```C++
-bool isUgly(int number){
-	while (number % 2 == 0)
-	{
-		number = number / 2;
-	}
-
-	while (number % 3 == 0)
-	{
-		number = number / 3;
-	}
-
-	while (number % 5 == 0)
-	{
-		number = number / 5;
-	}
-
-	if (number == 1)
-	{
-		return true;
-	}else {
-		return false;
-	}
-}
-
-int getTheUgly(int index){
-	if (index <= 0)
-	{
-		return 0;
-	}
-
-	int count = 0;
-	int number = 0
-	while(count < index){
-		if (isUgly(number))
-		{
-			count++;
-		}
-
-		number++;
-	}
-
-	return number;
-}
-```
-
-### 34.[第一个只出现一次的字符位置](http://www.nowcoder.com/practice/1c82e8cf713b4bbeb2a5b31cf5b0417c?tpId=13&tqId=11187&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
-
-```c++
-int FirstNotRepeatingChar(char * str) {
-        if (str == NULL)
-        {
-        	return '\0'
-        }
-
-        const int tableSize = 256;
-        unsigned int hashTable[tableSize];
-        for (int i = 0; i < tableSize; ++i)
-        {
-        	hashTable[i] = 0;
-        }
-
-        char *hashKey = str;
-
-        while(hashKey != '\0'){
-        	hashTable[hashKey]++;
-        	hashKey++;
-        }
-
-        hashKey = str;
-
-        while(hashKey != '\0'){
-        	if (hashTable[hashKey] == 1)
-        	{
-        		return *hashKey;
-        	}else {
-        		hashKey++;
-        	}
-        }
-    }
-```
-
-### 35.[数组中的逆序对](http://www.nowcoder.com/practice/96bd6684e04a44eb80e6a68efc0ec6c5?tpId=13&tqId=11188&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
-
-```c++
-//利用归并的思想好难，先用暴力解决下吧
-
-int InversePairs(vector<int> data) {
-	int count = 0;
-        for (int i = 0; i < data.size(); ++i)
-        {
-        	for (int j = 0; j < i; ++j)
-        	{
-        		if (data[i]>data[j])
-        		{
-        			count++;
-        		}
-        	}
-        }
-
-        return count;
-}
-
-//归并排序思想
-int InversePairs(vector<int> data) {
-        int length  = data.size();
-        return mergeSort(data, 0, length-1);
-    }
- 
-    int mergeSort(vector<int>& data, int start, int end) {
-        // 递归终止条件
-        if(start >= end) {
-            return 0;
-        }
- 
-        // 递归
-        int mid = (start + end) / 2;
-        int leftCounts = mergeSort(data, start, mid);
-        int rightCounts = mergeSort(data, mid+1, end);
- 
-        // 归并排序，并计算本次逆序对数
-        vector<int> copy(data); // 数组副本，用于归并排序
-        int foreIdx = mid;      // 前半部分的指标
-        int backIdx = end;      // 后半部分的指标
-        int counts = 0;         // 记录本次逆序对数
-        int idxCopy = end;      // 辅助数组的下标
-        while(foreIdx>=start && backIdx >= mid+1) {
-            if(data[foreIdx] > data[backIdx]) {
-                copy[idxCopy--] = data[foreIdx--];
-                counts += backIdx - mid;
-            } else {
-                copy[idxCopy--] = data[backIdx--];
+    max:=nums[0]
+    dp :=make([]int,len(nums))
+    dp[0]=nums[0]
+    for i:=1;i<len(nums);i++{ 
+        if dp[i-1]+nums[i] >= nums[i] {
+            dp[i]=dp[i-1]+nums[i]
+            if dp[i]>=max{
+                max = dp[i]
+            }
+        }else {
+            dp[i]=nums[i]
+            if dp[i]>=max{
+                max = dp[i]
             }
         }
-        while(foreIdx >= start) {
-            copy[idxCopy--] = data[foreIdx--];
-        }
-        while(backIdx >= mid+1) {
-            copy[idxCopy--] = data[backIdx--];
-        }
-        for(int i=start; i<=end; i++) {
-            data[i] = copy[i];
-        }
- 
-        return (leftCounts+rightCounts+counts);
-    }
-```
-
-### 36.[两个链表的第一个公共结点](http://www.nowcoder.com/practice/6ab1d9a29e88450685099d45c9e31e46?tpId=13&tqId=11189&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
-
-```C++
-//牛客网一位大神的解法，真心6
-//用两个指针扫描”两个链表“，最终两个指针到达 null 或者到达公共结点。
- ListNode* FindFirstCommonNode( ListNode *pHead1, ListNode *pHead2) {
-        ListNode *p1;
-        ListNode *p2;
-        while(p1 != p2){
-        	p1 = (p1 == NULL ? pHead2 :p1->next);
-        	p2 = (p2 == NULL ? pHead1 :p2->next);
-        }
-
-        return p1;
-    }
-
-
-
-//常规解法
-/*
-找出2个链表的长度，然后让长的先走两个链表的长度差，然后再一起走
-（因为2个链表用公共的尾部）
-*/
-class Solution {
-public:
-    ListNode* FindFirstCommonNode( ListNode *pHead1, ListNode *pHead2) {
-        int len1 = findListLenth(pHead1);
-        int len2 = findListLenth(pHead2);
-        if(len1 > len2){
-            pHead1 = walkStep(pHead1,len1 - len2);
-        }else{
-            pHead2 = walkStep(pHead2,len2 - len1);
-        }
-        while(pHead1 != NULL){
-            if(pHead1 == pHead2) return pHead1;
-            pHead1 = pHead1->next;
-            pHead2 = pHead2->next;
-        }
-        return NULL;
-    }
-     
-    int findListLenth(ListNode *pHead1){
-        if(pHead1 == NULL) return 0;
-        int sum = 1;
-        while(pHead1 = pHead1->next) sum++;
-        return sum;
-    }
-     
-    ListNode* walkStep(ListNode *pHead1, int step){
-        while(step--){
-            pHead1 = pHead1->next;
-        }
-        return pHead1;
-    }
-};
-```
-
-### 37.[数字在排序数组中出现的次数](http://www.nowcoder.com/practice/70610bf967994b22bb1c26f9ae901fa2?tpId=13&tqId=11190&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
-
-```c++
- int GetNumberOfK(int* data ,int k) {
-
- 	int length = data.size();
- 	int number = 0;
- 	if (data != NULL && length > 0)
- 	{
- 		int first = findFirstK(data,length,k,0,length-1);
- 		int last = findLastK(data,length,k,0,length-1);
-
- 		if (first > -1 && last > -1)
- 		{
- 			number = last - first +1;
- 		}
- 	}
-
- 	return number;
         
     }
-
- int  findFirstK(int* data,int length,int k,int start,int end)
- {
- 	int mid = (start + end)/2;
- 	if (data[mid] == k)
- 	{
- 		if ( mid == 0 || mid >0 && data[mid -1] != k)
- 		{
- 			return mid;
- 		}else{
- 			end = mid -1;
- 		}
- 	}else if (data[mid] > k)
- 	{
- 		end = mid -1;
- 	}else {
- 		start = mid +1;
- 	}
-
- 	return findFirstK(data,length,k,start,end);
- }
-
- int findLastK(int* data ,int length,int k,int start,int end){
-
- 	int mid = (start + end)/2;
- 	if (data[mid] == k)
- 	{
- 		if ( mid == length -1 || mid <length -1 && data[mid +1] != k)
- 		{
- 			return mid;
- 		}else{
- 			start = mid +1;
- 		}
- 	}else if (data[mid] > k)
- 	{
- 		end = mid -1;
- 	}else {
- 		start = mid +1;
- 	}
-
- 	return findLastK(data,length,k,start,end);
- }
-```
-
-### 38.[二叉树的深度](http://www.nowcoder.com/practice/435fb86331474282a3499955f0a41e8b?tpId=13&tqId=11191&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
-
-```c++
-struct TreeNode {
-	int val;
-	struct TreeNode *left;
-	struct TreeNode *right;
-	TreeNode(int x) :
-			val(x), left(NULL), right(NULL) {
-	}
-};
-int TreeDepth(TreeNode *root)
-{
-	if (root == NULL)
-	{
-		return 0;
-	}
-
-	int left = TreeDepth(root->left);
-	int right = TreeDepth(root->right);
-
-	return (left > right) ? (left+1):(right+1);
+    return max
 }
 ```
 
-### 39.[平衡二叉树](http://www.nowcoder.com/practice/8b3b95850edb4115918ecebdf1b4d222?tpId=13&tqId=11192&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
+### 31.[整数中1出现的次数（从1到n整数中1出现的次数)](https://leetcode-cn.com/problems/1nzheng-shu-zhong-1chu-xian-de-ci-shu-lcof/)
 
-```c++
-bool IsBalanced = true;
-bool IsBalanced_Solution(TreeNode* pRoot) {
-		getDepth(pRoot);
-
-		return IsBalanced;
-    }
-
-int getDepth(TreeNode* pRoot){
-
-	if (pRoot == NULL)
-	{
-		return 0;
-	}
-
-	int left = getDepth(pRoot->left);
-
-	int right = getDepth(pRoot->right);
-
-	if (left - right < -1 || left-right > 1)
-	{
-		return false;
-	}
-
-	return left>right ? left+1 :right+1;
-
-}
-```
-
-### 40.[数组中只出现一次的数字](http://www.nowcoder.com/practice/e02fdb54d7524710a7d664d082bb7811?tpId=13&tqId=11193&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
-
-```c++
-#include <iostream>
-using namespace std;
-
-void calc(int* arr,int n)
-{
-	int result = 0;
-	int a=0,b=0;
-	for (int i = 0; i < n; ++i)
-	{
-		result = result^arr[i];
-	}
-
-	while(result)
-	{
-		if (result & 1 == 0)
-		{
-			index++;
-			result = result>>1;
+```go
+func countDigitOne(n int) int {
+	// 这里 digitNum 为 digit 所在位 对应的可能性
+	// 其实位为个位 因此 digitNum = 1  1乘以任何数 = 任何数
+	digitNum, sum := 1, 0
+	high, cur, low := n/10, n%10, 0
+	for high != 0 || cur != 0 {
+		// 固定位 计算数量
+		if cur < 1 {
+			sum += high * digitNum
+		} else if cur == 1 {
+			sum += high*digitNum + low + 1
+		} else {
+			sum += (high + 1) * digitNum
 		}
-		else break;
+		// 换下一位 更新高低位 及digit数量级
+		low = low + cur*digitNum
+		high, cur = high/10, high%10
+		digitNum = digitNum * 10
 	}
-
-	int cmp = 1<<index;
-
-	for (int i = 0; i < n; ++i)
-	{
-		if (arr[i] & cmp)
-		{
-			a = a^arr[i];
-		}else {
-			b = b^arr[i];
-		}
-	}
-
-	cout<<a<<" "<<b<<endl;
+	return sum
 }
 ```
 
-### 41.[和为S的连续正数序列](http://www.nowcoder.com/practice/c451a3fd84b64cb19485dad758a55ebe?tpId=13&tqId=11194&rp=3&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
+31-1[剑指 Offer 44. 数字序列中某一位的数字](https://leetcode-cn.com/problems/shu-zi-xu-lie-zhong-mou-yi-wei-de-shu-zi-lcof/)
 
-> 小明很喜欢数学,有一天他在做数学作业时,要求计算出9~16的和,他马上就写出了正确答案是100。但是他并不满足于此,他在想究竟有多少种连续的正数序列的和为100(至少包括两个数)。没多久,他就得到另一组连续正数和为100的序列:18,19,20,21,22。现在把问题交给你,你能不能也很快的找出所有和为S的连续正数序列? Good Luck! 
->
-> ```
-> 输出所有和为S的连续正数序列。序列内按照从小至大的顺序，序列间按照开始数字从小到大的顺序
-> ```
+### 32.[把数组排成最小的数](https://leetcode-cn.com/problems/ba-shu-zu-pai-cheng-zui-xiao-de-shu-lcof/)
 
-```C++
-void findContinuousSequence(int sum){
-	int small=1;
-	int big = 2;
-	int mid = sum /2;
-	int cursum = small + big;
-	while(small < mid){
-		
-		if (cursum = sum)
-		{
-			printResult(small,big);
-		}else if(cursum > sum){
-			cursum = cursum - small;
-			small++;
-		}else{
-
-		big++;
-		cursum = cursum + big;
-		}
-	}
-}
-
-void printResult(int small,int big){
-	for (int i = small; i < big; ++i)
-	{
-		printf("%d",i );
-	}
-}
-```
-
-### 42.[和为S的两个数字](http://www.nowcoder.com/practice/390da4f7a00f44bea7c2f3d19491311b?tpId=13&tqId=11195&rp=3&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
-
-> 输入一个递增排序的数组和一个数字S，在数组中查找两个数，使得他们的和正好是S，如果有多对数字的和等于S，输出两个数的乘积最小的。 
->
-> ```
-> 对应每个测试案例，输出两个数，小的先输出。
-> ```
-
-```c++
-void findNumber(int data[],int length,int sum){
-	
-
-	 int start = 0;
-	 int end = length-1;
-
-	  int min = data[start];
-	  int max = data[end];
-
-	 while(start < end){
-
-	 	if (min + max = sum)
-	 	{
-	 		cout<<min<<" "<<max<<endl;
-	 	}else if (min + max > sum)
-	 	{
-	 		end --;
-	 	}else{
-	 		start ++；
-	 	}
-	 }
-}
-```
-
-### 43.[左旋转字符串](http://www.nowcoder.com/practice/12d959b108cb42b1ab72cef4d36af5ec?tpId=13&tqId=11196&rp=3&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
-
-> 汇编语言中有一种移位指令叫做循环左移（ROL），现在有个简单的任务，就是用字符串模拟这个指令的运算结果。对于一个给定的字符序列S，请你把其循环左移K位后的序列输出。例如，字符序列S=”abcXYZdef”,要求输出循环左移3位后的结果，即“XYZdefabc”。是不是很简单？OK，搞定它！
->
-
-```c++
-void Reverse(char *start,char *end){
-	if (start == NULL || end == NULL)
-	{
-		return;
-	}
-
-	while(start < end ){
-		char temp = *start;
-		*start = *end;
-		*end = temp;
-
-		start++;
-		end--;
-	}
-}
-
-char * leftRotateString(char *ptr,int n){
-	int length = strlen(ptr);
-
-	char *start1 = ptr;
-	char *end1 = ptr+n-1;
-	char *start2 = ptr+n;
-	char *end2 = ptr+length-1;
-
-	Reverse(start1,end1);
-	Reverse(start2,end2);
-	Reverse(start1,end2);
-}
-```
-
-### 44.[翻转单词顺序列](http://www.nowcoder.com/practice/3194a4f4cf814f63919d0790578d51f3?tpId=13&tqId=11197&rp=3&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
-
-```c++
-char* ReverseSentence(char *s)
-{
-// 这两个指针用来确定一个单词的首尾边界
-    char *start = s ;    // 指向单词的首字符
-    char *end = s ;    // 指向空格或者 '\0'
-	char *ptr =s;
-    while(*ptr++ != '\0')
-    {
-        if (*ptr == ' '||*ptr =='\0')//最后一个单词为‘\0’
-        {
-			end = ptr-1;
-			while(start < end)
-            {
-				swap(*start++, *end--) ;
+```go
+func minNumber(nums []int) string {
+        for i:=0;i<len(nums)-1;i++{
+			for j:=i+1;j<len(nums);j++ {
+				if compare(nums[i],nums[j]){
+					nums[i],nums[j]=nums[j],nums[i]
+				}
 			}
-            start = end = ptr+1 ; // 指向下一个单词首字符
-        }
-       
-    }
-	//end = ptr-1;
- //   swap(*start++, *end--) ; // 对最后一个单词逆序
-	start = s; end = ptr -2;
-	while(start < end)
-    {
-		swap(*start++, *end--) ; // 对整个句子逆序
-	}
-    return s ;
-}
-```
-
-### 45.[扑克牌顺子](http://www.nowcoder.com/practice/762836f4d43d43ca9deb273b3de8e1f4?tpId=13&tqId=11198&rp=3&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
-
-> LL今天心情特别好,因为他去买了一副扑克牌,发现里面居然有2个大王,2个小王(一副牌原本是54张^_^)...他随机从中抽出了5张牌,想测测自己的手气,看看能不能抽到顺子,如果抽到的话,他决定去买体育彩票,嘿嘿！！“红心A,黑桃3,小王,大王,方片5”,“Oh My God!”不是顺子.....LL不高兴了,他想了想,决定大\小 王可以看成任何数字,并且A看作1,J为11,Q为12,K为13。上面的5张牌就可以变成“1,2,3,4,5”(大小王分别看作2和4),“So Lucky!”。LL决定去买体育彩票啦。 现在,要求你使用这幅牌模拟上面的过程,然后告诉我们LL的运气如何。为了方便起见,你可以认为大小王是0。
->
-
-```c++
-bool isContinuous(int *numbers,int length)
-{
-	if (numbers == NULL || length < 1)
-	{
-		return false;
-	}
-
-	qsort(numbers);
-
-	int numberofzero = 0;
-	int numberofgap =0;
-
-	for (int i = 0; i < length && numbers[i] == 0; ++i)
-	{
-		numberofzero++;
-	}
-
-	int small = numberofzero;
-	int big = small+1;
-	while(big < length){
-		if (numbers[small] == numbers[big])
-		{
-			return false;
 		}
+		s:=""
+		
+		for i:=range nums{
+			s=s+strconv.Itoa(nums[i])
+		}
+		return s
+}
 
-		numberofgap += numbers[big] - numbers[small] -1;
-		small = big;
-		big++;
+
+func compare(a,b int)bool{
+	sa:= strconv.Itoa(a)+strconv.Itoa(b)
+	sb:= strconv.Itoa(b)+strconv.Itoa(a)
+	na,_:=strconv.Atoi(sa)
+	nb,_:=strconv.Atoi(sb)
+
+	return na>nb
+}
+```
+
+32-1.[剑指 Offer 46. 把数字翻译成字符串](https://leetcode-cn.com/problems/ba-shu-zi-fan-yi-cheng-zi-fu-chuan-lcof/)
+
+32-2.[剑指 Offer 47. 礼物的最大价值](https://leetcode-cn.com/problems/li-wu-de-zui-da-jie-zhi-lcof/)
+
+32-3.[剑指 Offer 48. 最长不含重复字符的子字符串](https://leetcode-cn.com/problems/zui-chang-bu-han-zhong-fu-zi-fu-de-zi-zi-fu-chuan-lcof/)
+
+### 33.[丑数](https://leetcode-cn.com/problems/chou-shu-lcof/)
+
+### 34.[第一个只出现一次的字符位置](https://leetcode-cn.com/problems/di-yi-ge-zhi-chu-xian-yi-ci-de-zi-fu-lcof/)
+
+### 35.[数组中的逆序对](https://leetcode-cn.com/problems/shu-zu-zhong-de-ni-xu-dui-lcof/)
+
+### 36.[两个链表的第一个公共结点](https://leetcode-cn.com/problems/liang-ge-lian-biao-de-di-yi-ge-gong-gong-jie-dian-lcof/)
+
+```go
+/**
+ * Definition for singly-linked list.
+ * type ListNode struct {
+ *     Val int
+ *     Next *ListNode
+ * }
+ */
+func getIntersectionNode(headA, headB *ListNode) *ListNode {
+	if headA==nil||headB==nil{
+		return nil
 	}
+    if headA==headB{
+		return headA
+	}
+	startA:=headA
+	startB:=headB
+	lenA:=0
+	lenB:=0
+	gap:=0
+	for startA!=nil{
+		lenA++
+		startA=startA.Next
+	}
+	for startB!=nil{
+		lenB++
+		startB=startB.Next
+	}
+	if lenA>lenB{
+		gap=lenA-lenB
+		for gap>0{
+			headA=headA.Next
+			gap--
+		}
+	}else{
+		gap=lenB-lenA
+		for gap>0{
+			headB=headB.Next
+			gap--
+		}
+	}
+    	if headA==headB{
+		return headA
+	}
+       for headA.Next!=nil&&headB.Next!=nil{
+       	   if headA.Next==headB.Next{
+       	   	return headA.Next
+		   }
+		   headA=headA.Next
+		   headB=headB.Next
+	   }
 
-	return numberofgap > numberofzero ? false :true;
+	   return nil
 }
 ```
 
-### 46.[孩子们的游戏(圆圈中最后剩下的数)](http://www.nowcoder.com/practice/f78a359491e64a50bce2d89cff857eb6?tpId=13&tqId=11199&rp=3&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
+36-2.[剑指 Offer 53 - II. 0～n-1中缺失的数字](https://leetcode-cn.com/problems/que-shi-de-shu-zi-lcof/)
 
-> 每年六一儿童节,牛客都会准备一些小礼物去看望孤儿院的小朋友,今年亦是如此。HF作为牛客的资深元老,自然也准备了一些小游戏。其中,有个游戏是这样的:首先,让小朋友们围成一个大圈。然后,他随机指定一个数m,让编号为0的小朋友开始报数。每次喊到m-1的那个小朋友要出列唱首歌,然后可以在礼品箱中任意的挑选礼物,并且不再回到圈中,从他的下一个小朋友开始,继续0...m-1报数....这样下去....直到剩下最后一个小朋友,可以不用表演,并且拿到牛客名贵的“名侦探柯南”典藏版(名额有限哦!!^_^)。请你试着想下,哪个小朋友会得到这份礼品呢？(注：小朋友的编号是从0到n-1)
->
+### 37.[数字在排序数组中出现的次数](https://leetcode-cn.com/problems/zai-pai-xu-shu-zu-zhong-cha-zhao-shu-zi-lcof/)
 
-```c++
-#include<stdio.h>
-#include<malloc.h>
-#include<stdlib.h>
+### 38.[二叉树的深度](https://leetcode-cn.com/problems/er-cha-shu-de-shen-du-lcof/)
 
-#define ListSize 100
+```go
+func maxDepth(root *TreeNode) int {
+if root ==nil{
+    return 0
+}
 
- struct ListNode
-{
- int data;
- struct ListNode *next; 
-};
+return max(maxDepth(root.Left),maxDepth(root.Right))+1
+    
+}
 
-
-void Josephus(ListNode *head, int n, int m, int k)
-{
- ListNode *p,*q;
- int i;
- p=head;
- /*先找到编号为k的人*/
- for(i=1; i<k; i++)/*从第k个人开始报数*/
-  {
-   q=p;
-   p=p->next;
-  }
- /*此时p指向第k个结点*/
- 
- while(p->next != p)/*这个是判断是否只剩下一个结点*/
-  {
-  /*找出报数m的人*/
-   for(i=1; i<m; i++)/*数到m的人出列*/
-    {
-     q=p;
-     p=p->next;
+func max(a,b int)int{
+    if a>=b{
+        return a
     }
-   /*此时p指向数到m的结点*/
-   /*此时q指向的是m的前驱结点，p指向的是第m个结点*/
-   
-   q->next = p->next;/*这步就是将m的前驱结点指针域指向
-   m的后继结点*/
-   printf("%4d",p->data);/*打印出出列的数据*/
-   free(p);/*释放出列的结点空间*/
-   p=q->next;/*指向下一个结点，重新开始报数*/
-  }
- printf("%4d\n", p->data);
- 
-}
- 
-/*//////////////////////////////////////////////////////////////////////////////
-函数名:       CreateCycList
-函数功能:   宏定义和单链表定义
-入口参数: int n
-出口参数: 
-//////////////////////////////////////////////////////////////////////////////*/
-ListNode *CreateCycList(int n)
-{
- ListNode *head = NULL;
- ListNode *s, *r;
- int i;
- for(i = 1; i <= n; i ++ )
-  {
-   s = (ListNode *)malloc(sizeof(ListNode));
-   s->data = i;
-   s->next = NULL;
-   if(head == NULL)
-    head = s;
-   else
-    r->next = s;/*本节点指针域指向下一个结点*/
-   r = s;/*临时指针指向下一个结点*/
-  }
- r->next = head;/*最后一个结点的指针域指向头结点形成环*/
- return head;/*返回头结点的地址*/
-}
-/*//////////////////////////////////////////////////////////////////////////////
-函数名:       main()
-函数功能:   主函数
-入口参数: 
-出口参数: 
-//////////////////////////////////////////////////////////////////////////////*/
-void main()
-{
- ListNode *h;
- int n,k,m;
- printf("输入环中人的个数n=");
- scanf("%d", & n);
- printf("输入开始报数的序号k=");
- scanf("%d", & k);
- printf("报数为m的人出列m=");
- scanf("%d", & m);
- h=CreateCycList(n);
- Josephus(h, n, m, k);
- system("pause");
+
+    return b
 }
 ```
 
-### 47.[求1+2+3+...+n](http://www.nowcoder.com/practice/7a0da8fc483247ff8800059e12d7caf1?tpId=13&tqId=11200&rp=3&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
+### 39.[平衡二叉树](https://leetcode-cn.com/problems/ping-heng-er-cha-shu-lcof/)
+
+### 40.[数组中只出现一次的数字](https://leetcode-cn.com/problems/shu-zu-zhong-shu-zi-chu-xian-de-ci-shu-lcof/)
+
+40-1.[剑指 Offer 56 - II. 数组中数字出现的次数 II](https://leetcode-cn.com/problems/shu-zu-zhong-shu-zi-chu-xian-de-ci-shu-ii-lcof/)
+
+### 41.[和为S的连续正数序列](https://leetcode-cn.com/problems/he-wei-sde-lian-xu-zheng-shu-xu-lie-lcof/)
+
+### 42.[和为S的两个数字](https://leetcode-cn.com/problems/he-wei-sde-liang-ge-shu-zi-lcof/)
+
+### 43.[左旋转字符串](https://leetcode-cn.com/problems/zuo-xuan-zhuan-zi-fu-chuan-lcof/)
+
+
+
+### 44.[翻转单词顺序列](https://leetcode-cn.com/problems/fan-zhuan-dan-ci-shun-xu-lcof/)
+
+### 45.[扑克牌顺子](https://leetcode-cn.com/problems/bu-ke-pai-zhong-de-shun-zi-lcof/)
+
+
+
+### 46.[圆圈中最后剩下的数](https://leetcode-cn.com/problems/yuan-quan-zhong-zui-hou-sheng-xia-de-shu-zi-lcof/)
+
+46-1.[剑指 Offer 63. 股票的最大利润](https://leetcode-cn.com/problems/gu-piao-de-zui-da-li-run-lcof/)
+
+### 47.[求1+2+3+...+n](https://leetcode-cn.com/problems/qiu-12n-lcof/)
 
 ```c++
 int sum(int n){
@@ -1798,226 +1144,23 @@ while(num){
 }
 ```
 
-### 48.[不用加减乘除做加法](http://www.nowcoder.com/practice/59ac416b4b944300b617d4f7f111b215?tpId=13&tqId=11201&rp=3&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
+### 48.[不用加减乘除做加法](https://leetcode-cn.com/problems/bu-yong-jia-jian-cheng-chu-zuo-jia-fa-lcof/) 
 
-> 写一个函数，求两个整数之和，要求在函数体内不得使用+、-、*、/四则运算符号。
->
+### 49.[把字符串转换成整数](https://leetcode-cn.com/problems/ba-zi-fu-chuan-zhuan-huan-cheng-zheng-shu-lcof/)
 
-```
-  int Add(int num1, int num2)
-    {
-        while(num2!=0)
-        {
-            int temp=num1^num2;
-            num2=(num1&num2)<<1;
-            num1=temp;
-        }
-        return num1;
-    }
-```
+### 50.[数组中重复的数字](https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof/)
 
-### 49.[把字符串转换成整数](http://www.nowcoder.com/practice/1277c681251b4372bdef344468e4f26e?tpId=13&tqId=11202&rp=3&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
+### 51.[构建乘积数组](https://leetcode-cn.com/problems/gou-jian-cheng-ji-shu-zu-lcof/)
 
-```c++
-#include<iostream>
-using namespace std;
+### 52.[正则表达式匹配](https://leetcode-cn.com/problems/regular-expression-matching/)
 
-int str2int(const char *str)
-{
-	const char *ptr = str;
-	int temp = 0;
-	if(*str == '+'|| *str == '-')
-	{
-		str++;
-	}
-	while(*str != 0)
-	{
-		if(*str < '0' || *str > '9')
-		{
-			break;
-		}
+### 53.[表示数值的字符串](https://leetcode-cn.com/problems/biao-shi-shu-zhi-de-zi-fu-chuan-lcof/)
 
-		temp = temp * 10 + (*str - '0');
-		str++;
-	}
+### 54.[字符流中第一个不重复的字符](https://leetcode-cn.com/problems/first-unique-character-in-a-string/)
 
-	if(*ptr == '-')
-	{
-		temp = -temp;
-	}
-	return temp;
-}
-int main()
-{
-	while(1)
-	{
-		int n = 0;
-	char s[20];
-	cin>>s;
-	n = str2int(s);
-	cout<<n<<endl;
-	}
-	
-	 system("pause");
-}
-```
+### 55.[链表中环的入口结点](https://leetcode-cn.com/problems/linked-list-cycle-ii/)
 
-### 50.[数组中重复的数字](http://www.nowcoder.com/practice/623a5ac0ea5b4e5f95552655361ae0a8?tpId=13&tqId=11203&rp=3&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
-
-> 在一个长度为n的数组里的所有数字都在0到n-1的范围内。 数组中某些数字是重复的，但不知道有几个数字是重复的。也不知道每个数字重复几次。请找出数组中任意一个重复的数字。 例如，如果输入长度为7的数组{2,3,1,0,2,5,3}，那么对应的输出是重复的数字2或者3。
->
-
-```c++
-int find(int *numbers,int length)
-{
-	for (int i = 0; i < length; ++i)
-	{
-		int index = numbers[i];
-		if (index > length)
-		{
-			index = index -length;
-		}
-
-		if (numbers[index] > length)
-		{
-			return index;
-		}
-
-		numbers[index] = numbers[index] + length;
-	}
-
-	return -1;
-}
-```
-
-### 51.[构建乘积数组](http://www.nowcoder.com/practice/94a4d381a68b47b7a8bed86f2975db46?tpId=13&tqId=11204&rp=3&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
-
-> 给定一个数组A[0,1,...,n-1],请构建一个数组B[0,1,...,n-1],其中B中的元素B[i]=A[0]*A[1]*...*A[i-1]*A[i+1]*...*A[n-1]。不能使用除法。
->
-
-```c++
- vector<int> multiply(const vector<int>& A) {
-
- 	int n = A.size();
-
- 	vector<int> b(n);
-
- 	int ret = 1;
- 	b[0] = 1;
-
- 	for (int i = 0; i < n; ++i)
- 	{
- 		b[i] = b[i-1] * A[i-1];
- 	}
-
- 	for (int i = n-1; i >=1; i--)
- 	{
- 		b[i] = b[i]*b[0];
-
- 		b[0] = b[0] *a[i];
- 	}
-
- 	return B; 
- }
-```
-
-### 52.[正则表达式匹配](http://www.nowcoder.com/practice/45327ae22b7b413ea21df13ee7d6429c?tpId=13&tqId=11205&rp=3&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
-
-> 请实现一个函数用来匹配包括'.'和'*'的正则表达式。模式中的字符'.'表示任意一个字符，而'*'表示它前面的字符可以出现任意次（包含0次）。 在本题中，匹配是指字符串的所有字符匹配整个模式。例如，字符串"aaa"与模式"a.a"和"ab*ac*a"匹配，但是与"aa.a"和"ab*a"均不匹配
->
-
-### 53.[表示数值的字符串](http://www.nowcoder.com/practice/6f8c901d091949a5837e24bb82a731f2?tpId=13&tqId=11206&rp=3&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
-
-> 请实现一个函数用来判断字符串是否表示数值（包括整数和小数）。例如，字符串"+100","5e2","-123","3.1416"和"-1E-16"都表示数值。 但是"12e","1a3.14","1.2.3","+-5"和"12e+4.3"都不是。
->
-
-### 54.[字符流中第一个不重复的字符](http://www.nowcoder.com/practice/00de97733b8e4f97a3fb5c680ee10720?tpId=13&tqId=11207&rp=3&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
-
-> 请实现一个函数用来找出字符流中第一个只出现一次的字符。例如，当从字符流中只读出前两个字符"go"时，第一个只出现一次的字符是"g"。当从该字符流中读出前六个字符“google"时，第一个只出现一次的字符是"l"。 
->
-> ```
-> 如果当前字符流没有存在出现一次的字符，返回#字符。
-> ```
-
-```c++
-int FirstNotRepeatingChar(char * str) {
-        if (str == NULL)
-        {
-        	return '\0'
-        }
-
-        const int tableSize = 256;
-        unsigned int hashTable[tableSize];
-        for (int i = 0; i < tableSize; ++i)
-        {
-        	hashTable[i] = 0;
-        }
-
-        char *hashKey = str;
-
-        while(hashKey != '\0'){
-        	hashTable[hashKey]++;
-        	hashKey++;
-        }
-
-        hashKey = str;
-
-        while(hashKey != '\0'){
-        	if (hashTable[hashKey] == 1)
-        	{
-        		return *hashKey;
-        	}else {
-        		hashKey++;
-        	}
-        }
-    }
-```
-
-### 55.[链表中环的入口结点](http://www.nowcoder.com/practice/253d2c59ec3e4bc68da16833f79a38e4?tpId=13&tqId=11208&rp=3&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
-
-> 一个链表中包含环，请找出该链表的环的入口结点。
->
-
-```c++
-//第一步，找环中相汇点。分别用p1，p2指向链表头部，p1每次走一步，p2每次走二步，直到p1==p2找到在环中的相汇点。
-//第二步，找环的入口。接上步，当p1==p2时，p2所经过节点数为2x,p1所经过节点数为x
-//设环中有n个节点,p2比p1多走一圈有2x=n+x; n=x;可以看出p1实际走了一个环的步数
-//再让p2指向链表头部，p1位置不变，p1,p2每次走一步直到p1==p2; 此时p1指向环的入口。
- ListNode* EntryNodeOfLoop(ListNode* pHead)
-    {
-    	ListNode *p1 = pHead;
-    	ListNode *p2 = pHead;
-
-    	while(p2 != NULL && p2.next!= NULL)
-    	{
-    		p1 = p1->next;
-    		p2 = p2->next->next;
-    		if (p1 == p2)
-    		{
-    			p2 = pHead;
-
-    			while(p1 = p2)
-    			{
-    				p1 = p1->next;
-    				p2 = p2->next;
-    			}
-
-    			if (p1 = p2)
-    			{
-    				return p1;
-    			}
-    		}
-    	}
-
-    	return NULL;
-
-    }
-```
-
-### 56.[删除链表中重复的结点](http://www.nowcoder.com/practice/fc533c45b73a41b0b44ccba763f866ef?tpId=13&tqId=11209&rp=3&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
-
-> 在一个排序的链表中，存在重复的结点，请删除该链表中重复的结点，重复的结点不保留，返回链表头指针。 例如，链表1->2->3->3->4->4->5 处理后为 1->2->5
->
+### 56.[删除链表中重复的结点](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list/)
 
 ### 57.[二叉树的下一个结点](http://www.nowcoder.com/practice/9023a0c988684a53960365b889ceaf5e?tpId=13&tqId=11210&rp=3&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
 
@@ -2056,100 +1199,26 @@ int FirstNotRepeatingChar(char * str) {
     }
 ```
 
-### 58.[对称的二叉树](http://www.nowcoder.com/practice/ff05d44dfdb04e1d83bdbdab320efbcb?tpId=13&tqId=11211&rp=3&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
+### 58.[对称的二叉树](https://leetcode-cn.com/problems/dui-cheng-de-er-cha-shu-lcof/)
 
-> 请实现一个函数，用来判断一颗二叉树是不是对称的。注意，如果一个二叉树同此二叉树的镜像是同样的，定义其为对称的。
->
+### 59.[按之字形顺序打印二叉树](https://leetcode-cn.com/problems/cong-shang-dao-xia-da-yin-er-cha-shu-iii-lcof/)
 
-```c++
-bool isSymmetrical(TreeNode* pRoot)
-    {
-    	if (pRoot == NULL)
-    	{
-    		return true;
-    	}
+### 60.[把二叉树打印成多行](https://leetcode-cn.com/problems/cong-shang-dao-xia-da-yin-er-cha-shu-ii-lcof/)
 
-    	return f(pRoot->left,pRoot->right);
-    }
+### 61.[序列化二叉树](https://leetcode-cn.com/problems/xu-lie-hua-er-cha-shu-lcof/)
+
+### 62.[二叉搜索树的第k个结点](https://leetcode-cn.com/problems/er-cha-sou-suo-shu-de-di-kda-jie-dian-lcof/)
+
+### 63.[数据流中的中位数](https://leetcode-cn.com/problems/shu-ju-liu-zhong-de-zhong-wei-shu-lcof/)
+
+### 64.[滑动窗口的最大值](https://leetcode-cn.com/problems/hua-dong-chuang-kou-de-zui-da-zhi-lcof/)
+
+### 65.[矩阵中的路径](https://leetcode-cn.com/problems/ju-zhen-zhong-de-lu-jing-lcof/)
+
+### 66.[机器人的运动范围](https://leetcode-cn.com/problems/ji-qi-ren-de-yun-dong-fan-wei-lcof/)
 
 
-bool f(TreeNode* p1,TreeNode* p2)
-{
-	if (p1 == NULL && p2 == NULL)
-	{
-		return true;
-	}
 
-	if (p1 != NULL && p2 != NULL)
-	{
-			return p1->val==p2->val && f(p1->left,p1->right) && f(p2->left,p2->right);
-	}
+#### [剑指 Offer 68 - I. 二叉搜索树的最近公共祖先](https://leetcode-cn.com/problems/er-cha-sou-suo-shu-de-zui-jin-gong-gong-zu-xian-lcof/)
 
-	return false;
-}
-```
-
-### 59.[按之字形顺序打印二叉树](http://www.nowcoder.com/practice/91b69814117f4e8097390d107d2efbe0?tpId=13&tqId=11212&rp=3&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
-
-### 60.[把二叉树打印成多行](http://www.nowcoder.com/practice/445c44d982d04483b04a54f298796288?tpId=13&tqId=11213&rp=3&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
-
-### 61.[序列化二叉树](http://www.nowcoder.com/practice/cf7e25aa97c04cc1a68c8f040e71fb84?tpId=13&tqId=11214&rp=4&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
-
-### 62.[二叉搜索树的第k个结点](http://www.nowcoder.com/practice/ef068f602dde4d28aab2b210e859150a?tpId=13&tqId=11215&rp=4&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
-
-```c++
-TreeNode* KthNode(TreeNode* pRoot, unsigned int k)
-    {
-        if (pRoot == NULL)
-        {
-        	return NULL;
-        }
-
-        if (pRoot->left != NULL)
-        {
-        	TreeNode* p = KthNode(pRoot->left,k);
-        	if (p != NULL)
-        	{
-        		return p;
-        	}
-        }
-
-        if (k == 1)
-        {
-        	return pRoot;
-        }else{
-        	k--;
-        }
-
-        if (pRoot->right != NULL)
-        {
-        	TreeNode* p = KthNode(pRoot->right,k);
-        	if (p != NULL)
-        	{
-        		return p;
-        	}
-        }
-        return NULL;
-    }
-```
-
-### 63.[数据流中的中位数](http://www.nowcoder.com/practice/9be0172896bd43948f8a32fb954e1be1?tpId=13&tqId=11216&rp=4&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
-
-> 如何得到一个数据流中的中位数？如果从数据流中读出奇数个数值，那么中位数就是所有数值排序之后位于中间的数值。如果从数据流中读出偶数个数值，那么中位数就是所有数值排序之后中间两个数的平均值。
->
-
-### 64.[滑动窗口的最大值](http://www.nowcoder.com/practice/1624bc35a45c42c0bc17d17fa0cba788?tpId=13&tqId=11217&rp=4&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
-
-> 给定一个数组和滑动窗口的大小，找出所有滑动窗口里数值的最大值。例如，如果输入数组{2,3,4,2,6,2,5,1}及滑动窗口的大小3，那么一共存在6个滑动窗口，他们的最大值分别为{4,4,6,6,6,5}； 针对数组{2,3,4,2,6,2,5,1}的滑动窗口有以下6个： {[2,3,4],2,6,2,5,1}， {2,[3,4,2],6,2,5,1}， {2,3,[4,2,6],2,5,1}， {2,3,4,[2,6,2],5,1}， {2,3,4,2,[6,2,5],1}， {2,3,4,2,6,[2,5,1]}。
->
-
-### 65.[矩阵中的路径](http://www.nowcoder.com/practice/c61c6999eecb4b8f88a98f66b273a3cc?tpId=13&tqId=11218&rp=4&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
-
-> 请设计一个函数，用来判断在一个矩阵中是否存在一条包含某字符串所有字符的路径。路径可以从矩阵中的任意一个格子开始，每一步可以在矩阵中向左，向右，向上，向下移动一个格子。如果一条路径经过了矩阵中的某一个格子，则该路径不能再进入该格子。 例如 a b c e s f c s a d e e 矩阵中包含一条字符串"bcced"的路径，但是矩阵中不包含"abcb"路径，因为字符串的第一个字符b占据了矩阵中的第一行第二个格子之后，路径不能再次进入该格子。
->
-
-### 66.[机器人的运动范围](http://www.nowcoder.com/practice/6e5207314b5241fb83f2329e89fdecc8?tpId=13&tqId=11219&rp=4&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
-
-> 地上有一个m行和n列的方格。一个机器人从坐标0,0的格子开始移动，每一次只能向左，右，上，下四个方向移动一格，但是不能进入行坐标和列坐标的数位之和大于k的格子。 例如，当k为18时，机器人能够进入方格（35,37），因为3+5+3+7 = 18。但是，它不能进入方格（35,38），因为3+5+3+8 = 19。请问该机器人能够达到多少个格子？
->
-
+#### [剑指 Offer 68 - II. 二叉树的最近公共祖先](https://leetcode-cn.com/problems/er-cha-shu-de-zui-jin-gong-gong-zu-xian-lcof/)
