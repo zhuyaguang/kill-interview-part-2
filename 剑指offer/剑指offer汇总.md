@@ -1,7 +1,5 @@
 ## 剑指offer汇总
 
-> 4,6.10-1,10-2,10-3,10-4,12,17,19,23,24,25
-
 ### 1.[剑指 Offer 04. 二维数组中的查找](https://leetcode-cn.com/problems/er-wei-shu-zu-zhong-de-cha-zhao-lcof/)
 
 > 同[240. 搜索二维矩阵 II](https://leetcode-cn.com/problems/search-a-2d-matrix-ii/)相同
@@ -9,33 +7,7 @@
 #### 解法一：暴力
 
 ```c++
-#include<iostream>
-using namespace std;
 
-int main()
-{
-	
-	int num[4][4] = {
-		{1,2,8,9},
-		{2,4,9,12},
-		{4,7,10,13},
-		{6,8,11,15}
-	};
-	int tar;
-	cin>>tar;
-	int flag = 0;
-	for(int i=0;i<4;i++)
-		for(int j=0;j<4;j++)
-		{
-			if(num[i][j]==tar)
-			{
-				flag = 1;
-				break;
-			}
-		}
-		cout<<flag;
-		system("pause");
- }
 ```
 
 #### 解法二:从左下角或者右上角查找
@@ -457,17 +429,7 @@ func mergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
 
 ### 17.[树的子结构](https://leetcode-cn.com/problems/shu-de-zi-jie-gou-lcof/)
 
-> 输入两棵二叉树A，B，判断B是不是A的子结构。（ps：我们约定空树不是任意一个树的子结构）
-
 ```go
-/**
- * Definition for a binary tree node.
- * type TreeNode struct {
- *     Val int
- *     Left *TreeNode
- *     Right *TreeNode
- * }
- */
 func isSubStructure(A *TreeNode, B *TreeNode) bool {
     res:=false
     if A==nil || B==nil{
@@ -510,9 +472,7 @@ func issub(A *TreeNode, B *TreeNode) bool{
 
 
 
-### 18.[二叉树的镜像](http://www.nowcoder.com/practice/564f4c26aa584921bc75623e48ca3011?tpId=13&tqId=11171&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
-
-> 操作给定的二叉树，将其变换为源二叉树的镜像。
+### 18.[二叉树的镜像](https://leetcode-cn.com/problems/er-cha-shu-de-jing-xiang-lcof/)
 
 ```go
 func mirrorTree(root *TreeNode) *TreeNode {
@@ -569,9 +529,7 @@ func spiralOrder(matrix [][]int) []int {
 }
 ```
 
-### 20.[包含min函数的栈](http://www.nowcoder.com/practice/4c776177d2c04c2494f2555c9fcc1e49?tpId=13&tqId=11173&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
-
-> 定义栈的数据结构，请在该类型中实现一个能够得到栈最小元素的min函数。
+### 20.[包含min函数的栈](https://leetcode-cn.com/problems/bao-han-minhan-shu-de-zhan-lcof/)
 
 ```go
 type MinStack struct {
@@ -615,8 +573,6 @@ func min(x, y int) int {
 
 ### 21.[栈的压入、弹出序列](https://leetcode-cn.com/problems/zhan-de-ya-ru-dan-chu-xu-lie-lcof/)
 
-> 输入两个整数序列，第一个序列表示栈的压入顺序，请判断第二个序列是否为该栈的弹出顺序。假设压入栈的所有数字均不相等。例如序列1,2,3,4,5是某栈的压入顺序，序列4，5,3,2,1是该压栈序列对应的一个弹出序列，但4,3,5,1,2就不可能是该压栈序列的弹出序列。（注意：这两个序列的长度是相等的）
-
 ```go
 func validateStackSequences(pushed []int, popped []int) bool {
 	stackA:=[]int{}
@@ -640,7 +596,7 @@ func validateStackSequences(pushed []int, popped []int) bool {
 }
 ```
 
-### 22.[从上往下打印二叉树](http://www.nowcoder.com/practice/7fe2212963db4790b57431d9ed259701?tpId=13&tqId=11175&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
+### 22.[从上往下打印二叉树](https://leetcode-cn.com/problems/cong-shang-dao-xia-da-yin-er-cha-shu-lcof/)
 
 > 从上往下打印出二叉树的每个节点，同层节点从左至右打印。
 
@@ -741,8 +697,6 @@ func dfs1(root *TreeNode,trace []int,tar int)  {
 ```
 
 ### 25.[复杂链表的复制](https://leetcode-cn.com/problems/fu-za-lian-biao-de-fu-zhi-lcof/)
-
-> 输入一个复杂链表（每个节点中有节点值，以及两个指针，一个指向下一个节点，另一个特殊指针指向任意一个节点），返回结果为复制后复杂链表的head。（注意，输出结果中请不要返回参数中的节点引用，否则判题程序会直接返回空）
 
 ```go
 func copyRandomList(head *Node) *Node {
@@ -850,7 +804,6 @@ func backtracks(s []string ,traces string,visit []bool)  {
 			visit[i]=false
 	}
 }
-
 ```
 
 
@@ -879,10 +832,6 @@ func majorityElement(nums []int) int {
 ```
 
 ### 29.[最小的K个数](https://leetcode-cn.com/problems/zui-xiao-de-kge-shu-lcof/)
-
-> 输入n个整数，找出其中最小的K个数。例如输入4,5,1,6,2,7,3,8这8个数字，则最小的4个数字是1,2,3,4,。
-
-大根堆
 
 ```go
 func getLeastNumbers(arr []int, k int) []int {
@@ -1119,13 +1068,9 @@ func max(a,b int)int{
 
 ### 43.[左旋转字符串](https://leetcode-cn.com/problems/zuo-xuan-zhuan-zi-fu-chuan-lcof/)
 
-
-
 ### 44.[翻转单词顺序列](https://leetcode-cn.com/problems/fan-zhuan-dan-ci-shun-xu-lcof/)
 
 ### 45.[扑克牌顺子](https://leetcode-cn.com/problems/bu-ke-pai-zhong-de-shun-zi-lcof/)
-
-
 
 ### 46.[圆圈中最后剩下的数](https://leetcode-cn.com/problems/yuan-quan-zhong-zui-hou-sheng-xia-de-shu-zi-lcof/)
 
@@ -1144,7 +1089,7 @@ while(num){
 }
 ```
 
-### 48.[不用加减乘除做加法](https://leetcode-cn.com/problems/bu-yong-jia-jian-cheng-chu-zuo-jia-fa-lcof/) 
+### 48.[不用加减乘除做加法](https://leetcode-cn.com/problems/bu-yong-jia-jian-cheng-chu-zuo-jia-fa-lcof/)
 
 ### 49.[把字符串转换成整数](https://leetcode-cn.com/problems/ba-zi-fu-chuan-zhuan-huan-cheng-zheng-shu-lcof/)
 
