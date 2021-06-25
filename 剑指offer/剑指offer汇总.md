@@ -1,5 +1,7 @@
 ## 剑指offer汇总
 
+> 4,6.10-1,10-2,10-3,10-4,12,17,19,23,24,25
+
 ### 1.[剑指 Offer 04. 二维数组中的查找](https://leetcode-cn.com/problems/er-wei-shu-zu-zhong-de-cha-zhao-lcof/)
 
 > 同[240. 搜索二维矩阵 II](https://leetcode-cn.com/problems/search-a-2d-matrix-ii/)相同

@@ -21,13 +21,11 @@
 
 ## LeetCode Top 100
 
-## 链表与二叉树全集
+## 链表
 
 ## [堆、heap、优先队列](https://github.com/zhuyaguang/kill-interview-part-2/blob/master/Heap%E3%80%81%E5%A0%86%E3%80%81%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97.md) 
 
 ## [回溯、DFS、背包](https://github.com/zhuyaguang/kill-interview-part-2/blob/master/%E5%9B%9E%E6%BA%AF%E4%B8%8E%E8%83%8C%E5%8C%85.md)
-
-## 动态规划经典题
 
 ## 滑动窗口
 
