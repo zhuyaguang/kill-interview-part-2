@@ -21,7 +21,7 @@
 
 ## LeetCode Top 100
 
-## 链表
+## [链表](https://github.com/zhuyaguang/kill-interview-part-2/blob/master/%E9%93%BE%E8%A1%A8.md)
 
 ## [堆、heap、优先队列](https://github.com/zhuyaguang/kill-interview-part-2/blob/master/Heap%E3%80%81%E5%A0%86%E3%80%81%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97.md) 
 
