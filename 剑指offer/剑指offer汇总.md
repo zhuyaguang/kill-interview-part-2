@@ -90,6 +90,35 @@ func reverseArr(arr []int)[]int{
 
 > 同[105. 从前序与中序遍历序列构造二叉树](https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/)相同
 
+~~~go
+func buildTree(preorder []int, inorder []int) *TreeNode {
+   if len(inorder)==0 || len(preorder)==0{
+        return nil
+    }
+
+    rootVal :=preorder[0]
+     
+    rootIndex :=0
+
+      for i,v :=range inorder{
+          if v == rootVal{
+              rootIndex = i
+          }
+      }
+      leftArr :=inorder[:rootIndex]
+      rightArr :=inorder[rootIndex+1:]
+      postLeft :=preorder[1:len(leftArr)+1]
+      postRight :=preorder[len(leftArr)+1:len(preorder)]
+      rootNode :=&TreeNode{
+          Val:rootVal,
+      }
+     rootNode.Left = buildTree(postLeft,leftArr)
+     rootNode.Right = buildTree(postRight,rightArr)
+
+     return rootNode
+}
+~~~
+
 
 
 ### 5.[用两个栈实现队列](https://leetcode-cn.com/problems/yong-liang-ge-zhan-shi-xian-dui-lie-lcof/)
