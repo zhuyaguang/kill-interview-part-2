@@ -1,16 +1,8 @@
 ## 剑指offer汇总
 
-> 4,6.10-1,10-2,10-3,10-4,12,17,19,23,24,25
-
 ### 1.[剑指 Offer 04. 二维数组中的查找](https://leetcode-cn.com/problems/er-wei-shu-zu-zhong-de-cha-zhao-lcof/)
 
-> 同[240. 搜索二维矩阵 II](https://leetcode-cn.com/problems/search-a-2d-matrix-ii/)相同
-
 #### 解法一：暴力
-
-```c++
-
-```
 
 #### 解法二:从左下角或者右上角查找
 
@@ -41,8 +33,6 @@ func findNumberIn2DArray(matrix [][]int, target int) bool {
 
 ### 2.[剑指 Offer 05. 替换空格](https://leetcode-cn.com/problems/ti-huan-kong-ge-lcof/)
 
-Go版本
-
 ```go
 func replaceSpace(s string) string {
         return strings.ReplaceAll(s," ","%20")
@@ -59,6 +49,19 @@ func replaceSpace(s string) string {
 		}
 	}
 	return res.String()
+}
+// 使用rune 数组
+func replaceSpace(s string) string {
+    arr :=[]rune(s)
+    result :=""
+    for _,v :=range arr{
+       if v!=32{
+           result = result+string(v)
+       }else{
+           result = result+"%20"
+       }
+    }
+    return result
 }
 ```
 
@@ -87,8 +90,6 @@ func reverseArr(arr []int)[]int{
 
 
 ### 4.[重建二叉树](https://leetcode-cn.com/problems/zhong-jian-er-cha-shu-lcof/)
-
-> 同[105. 从前序与中序遍历序列构造二叉树](https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/)相同
 
 ~~~go
 func buildTree(preorder []int, inorder []int) *TreeNode {
@@ -126,28 +127,24 @@ func buildTree(preorder []int, inorder []int) *TreeNode {
 ```go
 type CQueue struct {
   arr []int
-
 }
-
 
 func Constructor() CQueue {
 return CQueue{
      }
 }
 
-
 func (this *CQueue) AppendTail(value int)  {
         this.arr=append(this.arr,value)
 }
-
 
 func (this *CQueue) DeleteHead() int {
     if len(this.arr)==0{
         return -1
     }
-        resu:=this.arr[0]
-        this.arr=this.arr[1:]
-        return resu
+    resu:=this.arr[0]
+    this.arr=this.arr[1:]
+    return resu
 }
 ```
 
@@ -157,9 +154,32 @@ func (this *CQueue) DeleteHead() int {
 
 > 二分查找
 
+~~~go
+func findMin(nums []int) int {
+	left :=0
+	right :=len(nums)-1
+
+	for left<right{
+		mid :=left+(right-left)/2
+            if nums[mid]>nums[right]{
+            	left=mid+1
+			}else if nums[mid]<nums[right]{
+			right=mid
+		}else if nums[mid]==nums[right]{
+			right--
+		}
+	}
+
+	return nums[left]
+
+}
+~~~
+
+
+
 ### 7.[斐波那契数列](https://leetcode-cn.com/problems/fei-bo-na-qi-shu-lie-lcof/)
 
-```c++
+```go
 //我的解法
 
 long long Fibonacci(int n){
@@ -173,25 +193,26 @@ long long Fibonacci(int n){
 }
 
 
-//大神的解法 C++动态规划
-
- int Fibonacci(int n) {
-        int f = 0, g = 1;
-        while(n--) {
-            g += f;
-            f = g - f;
-        }
-        return f;
+//大神的解法 动态规划
+func fib(n int) int {
+    if n==0{
+        return 0
     }
-
-int main()
-{
-	
-	
-	cout<<Fibonacci(4);
-	
-	system("pause");
+    if n==1{
+        return 1
+    }
+    
+      dp:=make([]int,n+1)
+      dp[0]=0
+      dp[1]=1
+      for i:=2;i<=n;i++{
+          dp[i]=dp[i-1]+dp[i-2]
+          dp[i] %= 1000000007
+      }
+      return dp[n]
 }
+
+
 ```
 
 ### 8.[跳台阶](https://leetcode-cn.com/problems/qing-wa-tiao-tai-jie-wen-ti-lcof/)
@@ -278,8 +299,6 @@ int RectCover(int target) {
 
 ### 11.[二进制中1的个数](https://leetcode-cn.com/problems/er-jin-zhi-zhong-1de-ge-shu-lcof/)
 
-Go版本
-
 ```go
 func hammingWeight(num uint32) int {
     if num==0{
@@ -353,10 +372,6 @@ func exchange(nums []int) []int {
 
 ### 14.[链表中倒数第k个结点](https://leetcode-cn.com/problems/lian-biao-zhong-dao-shu-di-kge-jie-dian-lcof/)
 
-> 输入一个链表，输出该链表中倒数第k个结点。
-
-
-
 1.第一个指针先走k步,第二个指针开始走，当第一个指针走到尽头的时候，第二个指针就是倒数第K个结点
 
 2.
@@ -418,10 +433,6 @@ func reverseList(head *ListNode) *ListNode {
 
 ### 16.[合并两个排序的链表](https://leetcode-cn.com/problems/he-bing-liang-ge-pai-xu-de-lian-biao-lcof/)
 
-> 递归什么的很难想到，也很难理解
-
-Go:
-
 ```go
 func mergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
 	if l1==nil&&l2==nil{
@@ -476,9 +487,6 @@ func isSubStructure(A *TreeNode, B *TreeNode) bool {
    if res!=true{
 res =isSubStructure(A.Right,B)
    }
-    
-
-
         return res
 }
 
@@ -611,15 +619,12 @@ func validateStackSequences(pushed []int, popped []int) bool {
 	for _,v:=range pushed{
 		stackA=append(stackA,v)
 
-
 		for  stackA[len(stackA)-1]==popped[0]{
-
 				stackA=stackA[:len(stackA)-1]
 				popped=popped[1:]
 				if len(stackA)==0{
 					break
 				}
-
 		}
 	}
 	return  len(stackA)==0
@@ -628,8 +633,6 @@ func validateStackSequences(pushed []int, popped []int) bool {
 ```
 
 ### 22.[从上往下打印二叉树](https://leetcode-cn.com/problems/cong-shang-dao-xia-da-yin-er-cha-shu-lcof/)
-
-> 从上往下打印出二叉树的每个节点，同层节点从左至右打印。
 
 ```go
 func levelOrder(root *TreeNode) []int {
@@ -642,7 +645,7 @@ func levelOrder(root *TreeNode) []int {
 			index:=len(queue)
 			for i:=0;i<index;i++{
                 if queue[i]!=nil{
-result=append(result,queue[i].Val)
+				result=append(result,queue[i].Val)
 				queue=append(queue,queue[i].Left)
 				queue=append(queue,queue[i].Right)
                 }
@@ -655,8 +658,6 @@ result=append(result,queue[i].Val)
 }
 
 ```
-
-### 
 
 ### 23.[二叉搜索树的后序遍历序列](https://leetcode-cn.com/problems/er-cha-sou-suo-shu-de-hou-xu-bian-li-xu-lie-lcof/)
 
@@ -960,7 +961,9 @@ func countDigitOne(n int) int {
 }
 ```
 
-31-1[剑指 Offer 44. 数字序列中某一位的数字](https://leetcode-cn.com/problems/shu-zi-xu-lie-zhong-mou-yi-wei-de-shu-zi-lcof/)
+### 31-1[剑指 Offer 44. 数字序列中某一位的数字](https://leetcode-cn.com/problems/shu-zi-xu-lie-zhong-mou-yi-wei-de-shu-zi-lcof/)
+
+
 
 ### 32.[把数组排成最小的数](https://leetcode-cn.com/problems/ba-shu-zu-pai-cheng-zui-xiao-de-shu-lcof/)
 
@@ -994,26 +997,123 @@ func compare(a,b int)bool{
 
 32-1.[剑指 Offer 46. 把数字翻译成字符串](https://leetcode-cn.com/problems/ba-shu-zi-fan-yi-cheng-zi-fu-chuan-lcof/)
 
+~~~go
+func translateNum(num int) int {
+    if num <=9{
+        return 1
+    }
+    ba :=num%100
+    if ba <=9 || ba >=26{
+        return translateNum(num/10)
+    }else{
+        return translateNum(num/10)+translateNum(num/100)
+    }
+
+}
+~~~
+
 32-2.[剑指 Offer 47. 礼物的最大价值](https://leetcode-cn.com/problems/li-wu-de-zui-da-jie-zhi-lcof/)
 
+~~~go
+// 二维的dp数组
+func maxValue(grid [][]int) int {
+        m:=len(grid)
+        n:=len(grid[0])
+        for i:=1;i<n;i++{
+            grid[0][i]+=grid[0][i-1]
+        }
+        for i:=1;i<m;i++{
+            grid[i][0]+=grid[i-1][0]
+        }
+        fmt.Print(grid)
+        for i:=1;i<m;i++{
+            for j:=1;j<n;j++{
+                grid[i][j]+=max(grid[i-1][j],grid[i][j-1])
+            }
+        }
+        return grid[m-1][n-1]
+}
+
+func max(a,b int)int{
+    if a>=b{
+        return a
+    }else {
+        return b
+    }
+}
+~~~
+
 32-3.[剑指 Offer 48. 最长不含重复字符的子字符串](https://leetcode-cn.com/problems/zui-chang-bu-han-zhong-fu-zi-fu-de-zi-zi-fu-chuan-lcof/)
+
+~~~go
+func lengthOfLongestSubstring(s string) int {
+	if len(s)==0{
+		return 0
+	}
+	if len(s)==1{
+		return 1
+	}
+
+	windows :=make(map[string]int)
+	left :=0
+	right :=0
+	max :=-1
+	for right < len(s){
+		c :=s[right:right+1]
+        right++
+		windows[c]++
+		for windows[c]>1{
+			c2 :=s[left:left+1]
+			left++
+			windows[c2]--
+		}
+		if right-left>max{
+			max = right-left
+		}
+	}
+	if max == -1{
+		max = len(s)
+	}
+	return max
+}
+~~~
+
+
 
 ### 33.[丑数](https://leetcode-cn.com/problems/chou-shu-lcof/)
 
 ### 34.[第一个只出现一次的字符位置](https://leetcode-cn.com/problems/di-yi-ge-zhi-chu-xian-yi-ci-de-zi-fu-lcof/)
 
+~~~go
+func firstUniqChar(s string) byte {
+    n:=len(s)
+    if n==0{
+        return ' '
+    }
+    bMap:=make(map[byte]int)
+    for i,_:=range s{
+        bMap[s[i]]++
+    }
+
+    for i,_:=range s{
+        if bMap[s[i]]==1{
+            return s[i]
+        }
+    }
+  
+     return ' '
+
+}
+~~~
+
 ### 35.[数组中的逆序对](https://leetcode-cn.com/problems/shu-zu-zhong-de-ni-xu-dui-lcof/)
+
+暴力
 
 ### 36.[两个链表的第一个公共结点](https://leetcode-cn.com/problems/liang-ge-lian-biao-de-di-yi-ge-gong-gong-jie-dian-lcof/)
 
 ```go
-/**
- * Definition for singly-linked list.
- * type ListNode struct {
- *     Val int
- *     Next *ListNode
- * }
- */
+
 func getIntersectionNode(headA, headB *ListNode) *ListNode {
 	if headA==nil||headB==nil{
 		return nil
@@ -1064,7 +1164,29 @@ func getIntersectionNode(headA, headB *ListNode) *ListNode {
 
 36-2.[剑指 Offer 53 - II. 0～n-1中缺失的数字](https://leetcode-cn.com/problems/que-shi-de-shu-zi-lcof/)
 
+~~~go
+func missingNumber(nums []int) int {
+    n := len(nums)
+    sum := 0
+    for _,v:=range nums{
+        sum = sum + v
+    }
+    sum2 :=n*(n+1)/2
+    if sum == sum2{
+        return 0
+    }else{
+         return sum2-sum
+    }
+    return 0
+   
+}
+~~~
+
+
+
 ### 37.[数字在排序数组中出现的次数](https://leetcode-cn.com/problems/zai-pai-xu-shu-zu-zhong-cha-zhao-shu-zi-lcof/)
+
+遍历一次
 
 ### 38.[二叉树的深度](https://leetcode-cn.com/problems/er-cha-shu-de-shen-du-lcof/)
 
@@ -1089,19 +1211,144 @@ func max(a,b int)int{
 
 ### 39.[平衡二叉树](https://leetcode-cn.com/problems/ping-heng-er-cha-shu-lcof/)
 
+1深度差>2就是不平衡的
+
 ### 40.[数组中只出现一次的数字](https://leetcode-cn.com/problems/shu-zu-zhong-shu-zi-chu-xian-de-ci-shu-lcof/)
+
+map
 
 40-1.[剑指 Offer 56 - II. 数组中数字出现的次数 II](https://leetcode-cn.com/problems/shu-zu-zhong-shu-zi-chu-xian-de-ci-shu-ii-lcof/)
 
+map 
+
 ### 41.[和为S的连续正数序列](https://leetcode-cn.com/problems/he-wei-sde-lian-xu-zheng-shu-xu-lie-lcof/)
+
+ ~~~go
+ func findContinuousSequence(target int) [][]int {
+ 	if target == 0{
+ 		return [][]int{}
+ 	}
+ 	windows :=[]int{}
+ 	result :=[][]int{}
+ 	right :=1
+ 	windows = append(windows,1)
+ 	for right <= target/2+1{
+              sum := sumA(windows)
+              if sum < target{
+ 				 right++
+              	windows = append(windows,right)
+ 
+ 			 }else if sum > target{
+ 			 	windows = windows[1:]
+ 			 }else {
+ 			 	if len(windows)!=1{
+ 					result = append(result,windows)
+ 					windows = windows[1:]
+ 				}else {
+ 					break
+ 				}
+ 			 }
+ 	}
+ 
+ 	return result
+ }
+ 
+ func sumA(A []int) int {
+ 	sum :=0
+ 	for _,v:=range A{
+ 		sum = sum+v
+ 	}
+ 	return sum
+ }
+ ~~~
+
+
 
 ### 42.[和为S的两个数字](https://leetcode-cn.com/problems/he-wei-sde-liang-ge-shu-zi-lcof/)
 
+~~~go
+// 直接遍历会超时，双指针
+func twoSum(nums []int, target int) []int {
+    sort.Ints(nums)
+     n:=len(nums)
+     i,j:=0,n-1
+     result:=[]int{}
+     for i<j{
+         if nums[i]+nums[j]>target{
+             j--
+         }
+        if nums[i]+nums[j]==target{
+             return []int{nums[i],nums[j]}
+         }
+        if nums[i]+nums[j]<target{
+            i++
+         }
+     }
+     return result
+
+}
+~~~
+
+
+
 ### 43.[左旋转字符串](https://leetcode-cn.com/problems/zuo-xuan-zhuan-zi-fu-chuan-lcof/)
+
+~~~go
+func reverseLeftWords(s string, n int) string {
+   return s[n:]+s[0:n]
+
+}
+~~~
 
 ### 44.[翻转单词顺序列](https://leetcode-cn.com/problems/fan-zhuan-dan-ci-shun-xu-lcof/)
 
+~~~go
+func reverseWords(s string) string {
+	if len(s)==0{
+		return ""
+	}
+	  arrayS :=strings.Split(s," ")
+	  s2:=""
+	  for i:=len(arrayS)-1;i>=0;i--{
+	  	if arrayS[i]==""{
+	  		continue
+		}else{
+			s2=s2+" "+arrayS[i]
+		}
+
+	  }
+	 if len(s2)==0{
+	 	return ""
+	 }
+	  s2=s2[1:]
+	  return s2
+}
+~~~
+
+
+
 ### 45.[扑克牌顺子](https://leetcode-cn.com/problems/bu-ke-pai-zhong-de-shun-zi-lcof/)
+
+~~~go
+func isStraight(nums []int) bool {
+    sort.Ints(nums)
+    joker :=0
+    for i:=0;i<4;i++{
+        if nums[i]==0{
+            joker++
+            continue
+        }else{
+            if nums[i]==nums[i+1]{
+            return false
+        }
+        }       
+    }
+    return nums[4]-nums[joker] < 5
+
+}
+~~~
+
+
 
 ### 46.[圆圈中最后剩下的数](https://leetcode-cn.com/problems/yuan-quan-zhong-zui-hou-sheng-xia-de-shu-zi-lcof/)
 
@@ -1115,7 +1362,6 @@ int sum(int n){
 while(num){
 	num = num + sum(n-1);
 }
-
 	return num;
 }
 ```
