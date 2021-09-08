@@ -1352,7 +1352,55 @@ func isStraight(nums []int) bool {
 
 ### 46.[圆圈中最后剩下的数](https://leetcode-cn.com/problems/yuan-quan-zhong-zui-hou-sheng-xia-de-shu-zi-lcof/)
 
-46-1.[剑指 Offer 63. 股票的最大利润](https://leetcode-cn.com/problems/gu-piao-de-zui-da-li-run-lcof/)
+~~~go
+func lastRemaining(n int, m int) int {
+     result :=0
+     for i:=2;i<=n;i++{
+         result=(result+m)%i
+     }
+     return result
+}
+~~~
+
+
+
+### 46-1.[剑指 Offer 63. 股票的最大利润](https://leetcode-cn.com/problems/gu-piao-de-zui-da-li-run-lcof/)
+
+~~~go
+// 动态规划 前i天的最大收益 = max{前i-1天的最大收益，第i天的价格-前i-1天中的最小价格}
+func maxProfit(prices []int) int {
+     
+     length :=len(prices)
+     dp :=make([]int,length)
+     cost :=prices[0]
+     
+     for i:=1;i<length;i++{
+         cost = min(prices[i],cost)
+         dp[i] = max(dp[i-1],prices[i]-cost)
+         
+     }
+
+     return dp[length-1]
+}
+
+
+func min(a,b int)int{
+    if a>=b{
+        return b
+    }
+    return a
+}
+
+func max(a,b int)int{
+    if a>=b{
+        return a
+    }
+    return b
+}
+
+~~~
+
+
 
 ### 47.[求1+2+3+...+n](https://leetcode-cn.com/problems/qiu-12n-lcof/)
 
@@ -1368,11 +1416,83 @@ while(num){
 
 ### 48.[不用加减乘除做加法](https://leetcode-cn.com/problems/bu-yong-jia-jian-cheng-chu-zuo-jia-fa-lcof/)
 
+~~~go
+func add(a int, b int) int {
+             n := a^b
+             c := (a&b)<<1
+
+             return n+c
+}
+
+~~~
+
+
+
 ### 49.[把字符串转换成整数](https://leetcode-cn.com/problems/ba-zi-fu-chuan-zhuan-huan-cheng-zheng-shu-lcof/)
+
+~~~go
+func strToInt(str string) int {
+   str=strings.TrimSpace(str)
+   res:=0
+   flag:=1
+
+
+   for i,v:=range str{
+   	   if v>='0'&&v<='9'{
+   	   	res=res*10+int(v-'0')
+	   }else if v=='-' && i==0{
+   	flag=-1
+   }else if v=='+'&& i==0{
+   	flag=1
+   }else {
+       break
+   }
+      if res>math.MaxInt32{
+   	if flag==-1{
+   		return  math.MinInt32
+	}else{
+		return math.MaxInt32
+	}
+   }
+
+   }
+   
+   return flag*res
+}
+~~~
+
+
 
 ### 50.[数组中重复的数字](https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof/)
 
+Map
+
 ### 51.[构建乘积数组](https://leetcode-cn.com/problems/gou-jian-cheng-ji-shu-zu-lcof/)
+
+动态规划
+
+~~~go
+func constructArr(a []int) []int {
+     length :=len(a)
+     if length ==0 {
+         return []int{}
+     }
+     b :=make([]int,length)
+     b[0]=1
+     for i:=1;i<length;i++{
+         b[i]=b[i-1]*a[i-1]
+     }
+     tmp :=1
+     for j:=length-2;j>=0;j--{
+         tmp=tmp * a[j+1]
+         b[j]=b[j]*tmp
+     }
+
+     return b
+}
+~~~
+
+
 
 ### 52.[正则表达式匹配](https://leetcode-cn.com/problems/regular-expression-matching/)
 
@@ -1380,9 +1500,64 @@ while(num){
 
 ### 54.[字符流中第一个不重复的字符](https://leetcode-cn.com/problems/first-unique-character-in-a-string/)
 
+~~~go
+func firstUniqChar(s string) int {
+    cnt := [26]int{}
+    for _, ch := range s {
+        cnt[ch-'a']++
+    }
+    for i, ch := range s {
+        if cnt[ch-'a'] == 1 {
+            return i
+        }
+    }
+    return -1
+}
+~~~
+
 ### 55.[链表中环的入口结点](https://leetcode-cn.com/problems/linked-list-cycle-ii/)
 
+ ~~~go
+ func detectCycle(head *ListNode) *ListNode {
+     LMap:=map[*ListNode]int{}
+     for head!=nil{
+         if _,ok:=LMap[head];ok{
+             return head
+         }
+         LMap[head]++
+         head=head.Next
+     }
+     return nil
+ }
+ ~~~
+
+
+
 ### 56.[删除链表中重复的结点](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list/)
+
+~~~go
+func deleteDuplicates(head *ListNode) *ListNode {
+    if head==nil{
+        return nil
+    }
+    pre:=head
+    cur:=head.Next
+
+    for cur!=nil{
+        if pre.Val==cur.Val{
+            pre.Next=cur.Next
+            cur=pre.Next
+        }else{
+            pre=cur
+            cur=cur.Next
+        }
+    }
+
+    return head
+}
+~~~
+
+
 
 ### 57.[二叉树的下一个结点](http://www.nowcoder.com/practice/9023a0c988684a53960365b889ceaf5e?tpId=13&tqId=11210&rp=3&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
 
@@ -1423,19 +1598,129 @@ while(num){
 
 ### 58.[对称的二叉树](https://leetcode-cn.com/problems/dui-cheng-de-er-cha-shu-lcof/)
 
+~~~go
+// 先把找到数的镜像树，然后再判断是否相等
+func isSymmetric(root *TreeNode) bool {
+	if root==nil{
+		return true
+	}
+	tmp:=root
+	mi:=mirow(root)
+
+	return same(tmp,mi)
+
+}
+
+func same(root,mi *TreeNode) bool  {
+	if root==nil&&mi==nil{
+		return true
+	}
+	if root==nil{
+		return false
+	}
+	if mi==nil{
+		return false
+	}
+
+	if root.Val!=mi.Val{
+		return false
+	}
+	return same(root.Left,mi.Left)&&same(root.Right,mi.Right)
+}
+
+func mirow(root *TreeNode)  *TreeNode {
+	if root==nil{
+		return nil
+	}
+	p:=&TreeNode{
+		Val:   root.Val,
+		Left:  nil,
+		Right: nil,
+	}
+	left:=mirow(root.Left)
+	right:=mirow(root.Right)
+	p.Left=right
+	p.Right=left
+	return p
+}
+
+// 递归
+func isSymmetric(root *TreeNode) bool {
+    if root == nil {
+        return true
+    }
+
+    return helper(root.Left,root.Right)
+
+}
+
+func helper(root1,root2 *TreeNode) bool{
+    if root1==nil && root2==nil{
+        return true
+    }
+    if root1 ==nil || root2 == nil{
+        return false
+    }
+
+    return root1.Val==root2.Val && helper(root1.Left,root2.Right) && helper(root1.Right,root2.Left)
+}
+~~~
+
+
+
 ### 59.[按之字形顺序打印二叉树](https://leetcode-cn.com/problems/cong-shang-dao-xia-da-yin-er-cha-shu-iii-lcof/)
 
+层次遍历可以默写
+
 ### 60.[把二叉树打印成多行](https://leetcode-cn.com/problems/cong-shang-dao-xia-da-yin-er-cha-shu-ii-lcof/)
+
+层次遍历
 
 ### 61.[序列化二叉树](https://leetcode-cn.com/problems/xu-lie-hua-er-cha-shu-lcof/)
 
 ### 62.[二叉搜索树的第k个结点](https://leetcode-cn.com/problems/er-cha-sou-suo-shu-de-di-kda-jie-dian-lcof/)
+
+中序遍历
 
 ### 63.[数据流中的中位数](https://leetcode-cn.com/problems/shu-ju-liu-zhong-de-zhong-wei-shu-lcof/)
 
 ### 64.[滑动窗口的最大值](https://leetcode-cn.com/problems/hua-dong-chuang-kou-de-zui-da-zhi-lcof/)
 
 ### 65.[矩阵中的路径](https://leetcode-cn.com/problems/ju-zhen-zhong-de-lu-jing-lcof/)
+
+~~~go
+func exist(board [][]byte, word string) bool {
+	m:=len(board)
+	n:=len(board[0])
+	for i:=0;i<m;i++{
+		for j:=0;j<n;j++{
+			if dfs(board,word,i,j,0){
+				return true
+			}
+		}
+	}
+
+	return false
+
+
+}
+
+func dfs(board [][]byte, word string,i,j,k int)bool{
+	if i>= len(board)||i<0||j>=len(board[0])||j<0||board[i][j]!=word[k]{
+		return false
+	}
+	if k==len(word)-1{
+		return true
+	}
+	board[i][j]='*'
+	res:=dfs(board,word,i+1,j,k+1)||dfs(board,word,i-1,j,k+1)||dfs(board,word,i,j-1,k+1)||dfs(board,word,i,j+1,k+1)
+    board[i][j]=word[k]
+	return res
+
+}
+~~~
+
+
 
 ### 66.[机器人的运动范围](https://leetcode-cn.com/problems/ji-qi-ren-de-yun-dong-fan-wei-lcof/)
 
