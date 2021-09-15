@@ -1426,7 +1426,7 @@ func add(a int, b int) int {
 
 ~~~
 
-### [48.剑指 Offer 48. 最长不含重复字符的子字符串](https://leetcode-cn.com/problems/zui-chang-bu-han-zhong-fu-zi-fu-de-zi-zi-fu-chuan-lcof/)
+### 48.[最长不含重复字符的子字符串](https://leetcode-cn.com/problems/zui-chang-bu-han-zhong-fu-zi-fu-de-zi-zi-fu-chuan-lcof/)
 
 ~~~go
 func lengthOfNonRepeatingSubStr(s string) int {
@@ -1449,26 +1449,7 @@ func lengthOfNonRepeatingSubStr(s string) int {
 ~~~
 
 
-### [48.剑指 Offer 48. 最长不含重复字符的子字符串](https://leetcode-cn.com/problems/zui-chang-bu-han-zhong-fu-zi-fu-de-zi-zi-fu-chuan-lcof/)
-~~~go
-func lengthOfNonRepeatingSubStr(s string) int {
-	lastOccurred := make(map[rune]int)
-	start := 0
-	maxLength := 0
 
-	for i, ch := range []rune(s) {
-		if lastI, ok := lastOccurred[ch]; ok && lastI >= start {
-			start = lastI + 1
-		}
-		if i-start+1 > maxLength {
-			maxLength = i - start + 1
-		}
-		lastOccurred[ch] = i
-	}
-
-	return maxLength
-}
-~~~
 ### 49.[把字符串转换成整数](https://leetcode-cn.com/problems/ba-zi-fu-chuan-zhuan-huan-cheng-zheng-shu-lcof/)
 
 ~~~go
