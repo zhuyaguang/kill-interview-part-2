@@ -14,7 +14,8 @@
 ## [Top100](https://github.com/zhuyaguang/kill-interview-part-2/blob/master/Top100.md)
 
 # 专题
-## [排序](https://github.com/zhuyaguang/kill-interview-part-2/blob/master/%E6%8E%92%E5%BA%8F/%E6%8E%92%E5%BA%8F%E5%A4%A7%E6%80%BB%E7%BB%93(Golang%E7%89%88).md)
+
+## [排序](./sort)
 
 >  堆排序、快速排序、冒泡排序、希尔排序、选择排序、直接插入排序
 
@@ -24,10 +25,11 @@
 
 ## [Heap、堆、优先队列](https://github.com/zhuyaguang/kill-interview-part-2/blob/master/Heap%E3%80%81%E5%A0%86%E3%80%81%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97.md)
 
-## [回溯、DFS](https://github.com/zhuyaguang/kill-interview-part-2/blob/master/%E5%9B%9E%E6%BA%AF/)
+## [回溯、DFS](./backtrack)
 
 ## [工程思维题](https://github.com/zhuyaguang/kill-interview-part-2/blob/master/%E5%B7%A5%E7%A8%8B%E6%80%9D%E7%BB%B4%E9%A2%98.md)
 
 
 ## [背包问题](https://github.com/zhuyaguang/kill-interview-part-2/tree/master/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98)
-## [动态规划](https://github.com/zhuyaguang/kill-interview-part-2/tree/master/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92)
+
+## [动态规划](./dp)
