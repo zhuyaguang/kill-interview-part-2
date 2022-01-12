@@ -1,54 +1,530 @@
-## 剑指offer 第二版（75题）
+## 剑指offer汇总
 
-### 0.[数组中重复的数字](https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof/)
+### 1.[剑指 Offer 04. 二维数组中的查找](https://leetcode-cn.com/problems/er-wei-shu-zu-zhong-de-cha-zhao-lcof/)
 
-### 1.[二维数组中的查找](https://leetcode-cn.com/problems/er-wei-shu-zu-zhong-de-cha-zhao-lcof/)
+#### 解法一：暴力
 
-### 2.[替换空格](https://leetcode-cn.com/problems/ti-huan-kong-ge-lcof/)
+#### 解法二:从左下角或者右上角查找
+
+```Go
+func findNumberIn2DArray(matrix [][]int, target int) bool {
+    m:=len(matrix)
+    if m==0{
+        return false
+    }
+    n:=len(matrix[0])
+    i:=m-1
+    j:=0
+    for i>=0&&j<n{
+        if matrix[i][j]>target{
+            i--
+        }else if matrix[i][j]<target{
+            j++
+        }else if matrix[i][j]==target{
+            return true
+        }
+    }
+    return false
+}
+
+```
+
+
+
+### 2.[剑指 Offer 05. 替换空格](https://leetcode-cn.com/problems/ti-huan-kong-ge-lcof/)
+
+```go
+func replaceSpace(s string) string {
+        return strings.ReplaceAll(s," ","%20")
+}
+
+// 使用 strings.Builder
+func replaceSpace(s string) string {
+	var res strings.Builder
+    for i:=range s{
+    	if s[i]==' '{
+			res.WriteString("%20")
+		}else {
+			res.WriteByte(s[i])
+		}
+	}
+	return res.String()
+}
+// 使用rune 数组
+func replaceSpace(s string) string {
+    arr :=[]rune(s)
+    result :=""
+    for _,v :=range arr{
+       if v!=32{
+           result = result+string(v)
+       }else{
+           result = result+"%20"
+       }
+    }
+    return result
+}
+```
 
 ### 3.[从尾到头打印链表](https://leetcode-cn.com/problems/cong-wei-dao-tou-da-yin-lian-biao-lcof/)
 
-### 4.[重建二叉树](https://leetcode-cn.com/problems/zhong-jian-er-cha-shu-lcof/) 🌟
+```go
+func reversePrint(head *ListNode) []int {
+  arr:=[]int{}
+  cur:=head
+  for cur !=nil{
+  	arr =append(arr,cur.Val)
+  	cur=cur.Next
+  }
+  return reverseArr(arr)
+}
+
+func reverseArr(arr []int)[]int{
+
+	for i,j:=0,len(arr)-1;i<=j;i,j=i+1,j-1{
+		arr[i],arr[j]=arr[j],arr[i]
+	}
+	return arr
+}
+```
+
+
+
+### 4.[重建二叉树](https://leetcode-cn.com/problems/zhong-jian-er-cha-shu-lcof/)
+
+~~~go
+func buildTree(preorder []int, inorder []int) *TreeNode {
+   if len(inorder)==0 || len(preorder)==0{
+        return nil
+    }
+
+    rootVal :=preorder[0]
+     
+    rootIndex :=0
+
+      for i,v :=range inorder{
+          if v == rootVal{
+              rootIndex = i
+          }
+      }
+      leftArr :=inorder[:rootIndex]
+      rightArr :=inorder[rootIndex+1:]
+      postLeft :=preorder[1:len(leftArr)+1]
+      postRight :=preorder[len(leftArr)+1:len(preorder)]
+      rootNode :=&TreeNode{
+          Val:rootVal,
+      }
+     rootNode.Left = buildTree(postLeft,leftArr)
+     rootNode.Right = buildTree(postRight,rightArr)
+
+     return rootNode
+}
+~~~
+
+
 
 ### 5.[用两个栈实现队列](https://leetcode-cn.com/problems/yong-liang-ge-zhan-shi-xian-dui-lie-lcof/)
 
-### 6.[斐波那契数列](https://leetcode-cn.com/problems/fei-bo-na-qi-shu-lie-lcof/)
+```go
+type CQueue struct {
+  arr []int
+}
 
-### 7.[跳台阶](https://leetcode-cn.com/problems/qing-wa-tiao-tai-jie-wen-ti-lcof/)
+func Constructor() CQueue {
+return CQueue{
+     }
+}
 
-### 8.[旋转数组的最小数字](https://leetcode-cn.com/problems/xuan-zhuan-shu-zu-de-zui-xiao-shu-zi-lcof/) 🌟使用二分法
+func (this *CQueue) AppendTail(value int)  {
+        this.arr=append(this.arr,value)
+}
 
-### 9.[矩阵中的路径](https://leetcode-cn.com/problems/ju-zhen-zhong-de-lu-jing-lcof/) 🌟 DFS
+func (this *CQueue) DeleteHead() int {
+    if len(this.arr)==0{
+        return -1
+    }
+    resu:=this.arr[0]
+    this.arr=this.arr[1:]
+    return resu
+}
+```
 
-### 10.[机器人的运动范围](https://leetcode-cn.com/problems/ji-qi-ren-de-yun-dong-fan-wei-lcof/) 🌟 DFS
 
-### 11.[剪绳子](https://leetcode-cn.com/problems/jian-sheng-zi-lcof/) 🌟记规律
 
-### 12.[剪绳子 II](https://leetcode-cn.com/problems/jian-sheng-zi-ii-lcof/)
+### 6.[旋转数组的最小数字](https://leetcode-cn.com/problems/xuan-zhuan-shu-zu-de-zui-xiao-shu-zi-lcof/)
 
-### 13.[二进制中1的个数](https://leetcode-cn.com/problems/er-jin-zhi-zhong-1de-ge-shu-lcof/)
+> 二分查找
 
-### 14.[数值的整数次方](https://leetcode-cn.com/problems/shu-zhi-de-zheng-shu-ci-fang-lcof/) 🌟递归
+~~~go
+func findMin(nums []int) int {
+	left :=0
+	right :=len(nums)-1
 
-### 15.[打印从1到最大的n位数](https://leetcode-cn.com/problems/da-yin-cong-1dao-zui-da-de-nwei-shu-lcof/)
+	for left<right{
+		mid :=left+(right-left)/2
+            if nums[mid]>nums[right]{
+            	left=mid+1
+			}else if nums[mid]<nums[right]{
+			right=mid
+		}else if nums[mid]==nums[right]{
+			right--
+		}
+	}
 
-### 16.[删除链表的节点](https://leetcode-cn.com/problems/shan-chu-lian-biao-de-jie-dian-lcof/)
+	return nums[left]
 
-### 17.[正则表达式匹配](https://leetcode-cn.com/problems/regular-expression-matching/) 🌟🌟
+}
+~~~
 
-### 18.[表示数值的字符串](https://leetcode-cn.com/problems/biao-shi-shu-zhi-de-zi-fu-chuan-lcof/) 🌟🌟
 
-### 19.[调整数组顺序使奇数位于偶数前面](https://leetcode-cn.com/problems/diao-zheng-shu-zu-shun-xu-shi-qi-shu-wei-yu-ou-shu-qian-mian-lcof/)
 
-### 20.[链表中倒数第k个结点](https://leetcode-cn.com/problems/lian-biao-zhong-dao-shu-di-kge-jie-dian-lcof/)
+### 7.[斐波那契数列](https://leetcode-cn.com/problems/fei-bo-na-qi-shu-lie-lcof/)
 
-### 21.[反转链表](https://leetcode-cn.com/problems/fan-zhuan-lian-biao-lcof/) 🌟
+```go
+//我的解法
 
-### 22.[合并两个排序的链表](https://leetcode-cn.com/problems/he-bing-liang-ge-pai-xu-de-lian-biao-lcof/)
+long long Fibonacci(int n){
+	if(n == 1)
+		return 0;
+	if(n == 2)
+		return 1;
 
-### 23.[树的子结构](https://leetcode-cn.com/problems/shu-de-zi-jie-gou-lcof/)
+	return Fibonacci(n-1)+Fibonacci(n-2);
 
-### 24.[二叉树的镜像](https://leetcode-cn.com/problems/er-cha-shu-de-jing-xiang-lcof/)
+}
+
+
+//大神的解法 动态规划
+func fib(n int) int {
+    if n==0{
+        return 0
+    }
+    if n==1{
+        return 1
+    }
+    
+      dp:=make([]int,n+1)
+      dp[0]=0
+      dp[1]=1
+      for i:=2;i<=n;i++{
+          dp[i]=dp[i-1]+dp[i-2]
+          dp[i] %= 1000000007
+      }
+      return dp[n]
+}
+
+
+```
+
+### 8.[跳台阶](https://leetcode-cn.com/problems/qing-wa-tiao-tai-jie-wen-ti-lcof/)
+
+```c++
+int jumpFloor(int number) {
+        if (number == 1 || number == 2)
+	{
+		return number;
+	}else {
+		return jumpFloor(number-1)+jumpFloor(number-2);
+	}
+    }
+```
+
+Go版本dp解法
+
+```go
+func numWays(n int) int {
+
+    if n==0{
+        return 1
+    }
+    if n==1{
+        return 1
+    }
+
+    if n==2{
+        return 2
+    }
+
+	dp:=make([]int,n+1)
+	dp[0]=0
+	dp[1]=1
+	dp[2]=2
+	for i:=3;i<=n;i++{
+		dp[i]=dp[i-1]+dp[i-2]
+        dp[i]=dp[i]%1000000007
+	}
+	return dp[n]
+}
+```
+
+
+
+### 9.[变态跳台阶](http://www.nowcoder.com/practice/22243d016f6b47f2a6928b4313c85387?tpId=13&tqId=11162&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
+
+```c++
+int jumpFloorII(int number) {
+        if(number==1) return 1;
+        else if(number==2) return 2;
+        else
+        {
+            return 2*jumpFloorII(number-1);
+        }
+ 
+    }
+```
+
+### 10.[矩形覆盖](http://www.nowcoder.com/practice/72a5a919508a4251859fb2cfb987a0e6?tpId=13&tqId=11163&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
+
+> 我们可以用2*1的小矩形横着或者竖着去覆盖更大的矩形。请问用n个2*1的小矩形无重叠地覆盖一个2*n的大矩形，总共有多少种方法？
+
+```c++
+int RectCover(int target) {
+      if(target  <= 1){
+            return 1;
+        }
+        if(target*2 == 2){
+            return 1;
+        }else if(target*2 == 4){
+            return 2;
+        }else{
+            return RectCover((target-1))+RectCover(target-2);
+        }
+    }
+```
+
+### 10-3.[剑指 Offer 14- I. 剪绳子](https://leetcode-cn.com/problems/jian-sheng-zi-lcof/)
+
+### 10-4.[剑指 Offer 14- II. 剪绳子 II](https://leetcode-cn.com/problems/jian-sheng-zi-ii-lcof/)
+
+
+
+### 11.[二进制中1的个数](https://leetcode-cn.com/problems/er-jin-zhi-zhong-1de-ge-shu-lcof/)
+
+```go
+func hammingWeight(num uint32) int {
+    if num==0{
+        return 0
+    }
+    count:=0
+
+    for ;num>0;num&=num-1{
+        count++
+    }
+    return count
+}
+```
+
+
+
+### 12.[数值的整数次方](https://leetcode-cn.com/problems/shu-zhi-de-zheng-shu-ci-fang-lcof/)
+
+```go
+func myPow(x float64, n int) float64 {
+    if n==0{
+        return 1
+    }
+
+    if n==1{
+        return x
+    }
+
+    if n<0{
+        return 1.0/myPow(x,-n)
+    }else{
+        y:=myPow(x,n/2)
+        if n%2==0{
+            return y*y
+        }else{
+            return x*y*y
+        }
+    }
+
+}
+```
+
+### 13.[调整数组顺序使奇数位于偶数前面](https://leetcode-cn.com/problems/diao-zheng-shu-zu-shun-xu-shi-qi-shu-wei-yu-ou-shu-qian-mian-lcof/)
+
+> 输入一个整数数组，实现一个函数来调整该数组中数字的顺序，使得所有的奇数位于数组的前半部分，所有的偶数位于位于数组的后半部分，并保证奇数和奇数，偶数和偶数之间的相对位置不变。
+
+```go
+func exchange(nums []int) []int {
+	n:=len(nums)
+	i:=0
+	j:=n-1
+	for i<j{
+		if nums[i]%2!=0{
+			i++
+			continue
+		}
+		if nums[j]%2==0{
+			j--
+			continue
+		}
+
+		nums[i],nums[j]=nums[j],nums[i]
+	}
+	return nums
+
+}
+
+```
+
+
+
+### 14.[链表中倒数第k个结点](https://leetcode-cn.com/problems/lian-biao-zhong-dao-shu-di-kge-jie-dian-lcof/)
+
+1.第一个指针先走k步,第二个指针开始走，当第一个指针走到尽头的时候，第二个指针就是倒数第K个结点
+
+2.
+
+```go
+
+func getKthFromEnd(head *ListNode, k int) *ListNode {
+    if k==0{
+        return head
+    }
+    len:=0
+    cur :=head
+    result:=head
+    for cur!=nil{
+        len++
+        cur=cur.Next
+    }
+    index:=len-k
+    for result!=nil&&index>0{
+        index--
+        result=result.Next
+    }
+   return result
+}
+```
+
+
+
+### 15.[反转链表](https://leetcode-cn.com/problems/fan-zhuan-lian-biao-lcof/)
+
+```go
+
+// 迭代法
+
+func reverseList(head *ListNode) *ListNode {
+    var prev *ListNode
+    curr := head
+    for curr != nil {
+        next := curr.Next
+        curr.Next = prev
+        prev = curr
+        curr = next
+    }
+    return prev
+}
+//递归法
+func reverseList(head *ListNode) *ListNode {
+    if head == nil || head.Next == nil {
+        return head
+    }
+    newHead := reverseList(head.Next)
+    head.Next.Next = head
+    head.Next = nil
+    return newHead
+}
+```
+
+
+
+### 16.[合并两个排序的链表](https://leetcode-cn.com/problems/he-bing-liang-ge-pai-xu-de-lian-biao-lcof/)
+
+```go
+func mergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
+	if l1==nil&&l2==nil{
+		return nil
+	}
+	if l1==nil{
+		return l2
+	}
+	if l2==nil{
+		return l1
+	}
+          fake :=&ListNode{
+			  Val:   0,
+		  }
+		  cur :=fake
+		  for l1!=nil&&l2!=nil{
+		  	if l1.Val<l2.Val{
+		  		cur.Next=l1
+		  		l1=l1.Next
+			}else{
+				cur.Next=l2
+				l2=l2.Next
+			}
+            cur=cur.Next
+		  }
+		  if l1==nil{
+		  	cur.Next=l2
+		  }
+		  if l2==nil{
+		  	cur.Next=l1
+		  }
+    return fake.Next
+}
+
+```
+
+### 17.[树的子结构](https://leetcode-cn.com/problems/shu-de-zi-jie-gou-lcof/)
+
+```go
+func isSubStructure(A *TreeNode, B *TreeNode) bool {
+    res:=false
+    if A==nil || B==nil{
+        return false
+    }
+    if A.Val==B.Val{
+        res=issub(A,B)
+    }
+    if res!=true{
+ res =isSubStructure(A.Left,B)
+    }
+   
+   if res!=true{
+res =isSubStructure(A.Right,B)
+   }
+        return res
+}
+
+
+func issub(A *TreeNode, B *TreeNode) bool{
+         if B==nil{
+             return true
+         }
+
+         if A==nil{
+             return false
+         }
+
+         if A.Val!=B.Val{
+             return false
+         }
+
+         return issub(A.Left,B.Left)&&issub(A.Right,B.Right)
+}
+
+```
+
+
+
+### 18.[二叉树的镜像](https://leetcode-cn.com/problems/er-cha-shu-de-jing-xiang-lcof/)
+
+```go
+func mirrorTree(root *TreeNode) *TreeNode {
+    if root==nil{
+    	return nil
+	}
+	left :=mirrorTree(root.Left)
+	right :=mirrorTree(root.Right)
+	root.Right=left
+	root.Left=right
+	return root
+}
+```
 
 ### 19.[顺时针打印矩阵](https://leetcode-cn.com/problems/shun-shi-zhen-da-yin-ju-zhen-lcof/)
 
@@ -1040,9 +1516,9 @@ func constructArr(a []int) []int {
 
 
 
-### 
+### 52.[正则表达式匹配](https://leetcode-cn.com/problems/regular-expression-matching/)
 
-### 
+### 53.[表示数值的字符串](https://leetcode-cn.com/problems/biao-shi-shu-zhi-de-zi-fu-chuan-lcof/)
 
 ### 54.[字符流中第一个不重复的字符](https://leetcode-cn.com/problems/first-unique-character-in-a-string/)
 
@@ -1232,7 +1708,7 @@ func helper(root1,root2 *TreeNode) bool{
 
 ### 64.[滑动窗口的最大值](https://leetcode-cn.com/problems/hua-dong-chuang-kou-de-zui-da-zhi-lcof/)
 
-### 
+### 65.[矩阵中的路径](https://leetcode-cn.com/problems/ju-zhen-zhong-de-lu-jing-lcof/)
 
 ~~~go
 func exist(board [][]byte, word string) bool {
@@ -1268,7 +1744,7 @@ func dfs(board [][]byte, word string,i,j,k int)bool{
 
 
 
-### 
+### 66.[机器人的运动范围](https://leetcode-cn.com/problems/ji-qi-ren-de-yun-dong-fan-wei-lcof/)
 
 
 
