@@ -50,170 +50,21 @@
 
 ### 24.[二叉树的镜像](https://leetcode-cn.com/problems/er-cha-shu-de-jing-xiang-lcof/)
 
-### 19.[顺时针打印矩阵](https://leetcode-cn.com/problems/shun-shi-zhen-da-yin-ju-zhen-lcof/)
+### 25.[对称的二叉树](https://leetcode-cn.com/problems/dui-cheng-de-er-cha-shu-lcof/)
 
-```go
-func spiralOrder(matrix [][]int) []int {
-    if len(matrix) == 0 || len(matrix[0]) == 0 {
-        return []int{}
-    }
-    var (
-        rows, columns = len(matrix), len(matrix[0])
-        order = make([]int, rows * columns)
-        index = 0
-        left, right, top, bottom = 0, columns - 1, 0, rows - 1
-    )
+### 26.[顺时针打印矩阵](https://leetcode-cn.com/problems/shun-shi-zhen-da-yin-ju-zhen-lcof/) 🌟🌟
 
-    for left <= right && top <= bottom {
-        for column := left; column <= right; column++ {
-            order[index] = matrix[top][column]
-            index++
-        }
-        for row := top + 1; row <= bottom; row++ {
-            order[index] = matrix[row][right]
-            index++
-        }
-        if left < right && top < bottom {
-            for column := right - 1; column > left; column-- {
-                order[index] = matrix[bottom][column]
-                index++
-            }
-            for row := bottom; row > top; row-- {
-                order[index] = matrix[row][left]
-                index++
-            }
-        }
-        left++
-        right--
-        top++
-        bottom--
-    }
-    return order
-}
-```
+### 27.[包含min函数的栈](https://leetcode-cn.com/problems/bao-han-minhan-shu-de-zhan-lcof/)
 
-### 20.[包含min函数的栈](https://leetcode-cn.com/problems/bao-han-minhan-shu-de-zhan-lcof/)
+### 28.[栈的压入、弹出序列](https://leetcode-cn.com/problems/zhan-de-ya-ru-dan-chu-xu-lie-lcof/) 🌟🌟
 
-```go
-type MinStack struct {
-    stack []int
-    minStack []int
-}
+### 29.[从上往下打印二叉树](https://leetcode-cn.com/problems/cong-shang-dao-xia-da-yin-er-cha-shu-lcof/) 
 
-func Constructor() MinStack {
-    return MinStack{
-        stack: []int{},
-        minStack: []int{math.MaxInt64},
-    }
-}
+### 30.[从上到下打印二叉树 II](https://leetcode-cn.com/problems/cong-shang-dao-xia-da-yin-er-cha-shu-ii-lcof/) 🌟🌟
 
-func (this *MinStack) Push(x int)  {
-    this.stack = append(this.stack, x)
-    top := this.minStack[len(this.minStack)-1]
-    this.minStack = append(this.minStack, min(x, top))
-}
+### 31.[从上到下打印二叉树 III](https://leetcode-cn.com/problems/cong-shang-dao-xia-da-yin-er-cha-shu-iii-lcof/)
 
-func (this *MinStack) Pop()  {
-    this.stack = this.stack[:len(this.stack)-1]
-    this.minStack = this.minStack[:len(this.minStack)-1]
-}
-
-func (this *MinStack) Top() int {
-    return this.stack[len(this.stack)-1]
-}
-
-func (this *MinStack) Min() int {
-    return this.minStack[len(this.minStack)-1]
-}
-
-func min(x, y int) int {
-    if x < y {
-        return x
-    }
-    return y
-}
-```
-
-### 21.[栈的压入、弹出序列](https://leetcode-cn.com/problems/zhan-de-ya-ru-dan-chu-xu-lie-lcof/)
-
-```go
-func validateStackSequences(pushed []int, popped []int) bool {
-	stackA:=[]int{}
-
-	for _,v:=range pushed{
-		stackA=append(stackA,v)
-
-		for  stackA[len(stackA)-1]==popped[0]{
-				stackA=stackA[:len(stackA)-1]
-				popped=popped[1:]
-				if len(stackA)==0{
-					break
-				}
-		}
-	}
-	return  len(stackA)==0
-
-}
-```
-
-### 22.[从上往下打印二叉树](https://leetcode-cn.com/problems/cong-shang-dao-xia-da-yin-er-cha-shu-lcof/)
-
-```go
-func levelOrder(root *TreeNode) []int {
-        if root==nil{
-        	return []int{}
-		}
-		result:=[]int{}
-		queue :=[]*TreeNode{root}
-		for len(queue)>0{
-			index:=len(queue)
-			for i:=0;i<index;i++{
-                if queue[i]!=nil{
-				result=append(result,queue[i].Val)
-				queue=append(queue,queue[i].Left)
-				queue=append(queue,queue[i].Right)
-                }
-				
-			}
-			queue=queue[index:]
-		}
-
-		return result
-}
-
-```
-
-### 23.[二叉搜索树的后序遍历序列](https://leetcode-cn.com/problems/er-cha-sou-suo-shu-de-hou-xu-bian-li-xu-lie-lcof/)
-
-```go
-func verifyPostorder(postorder []int) bool {
-	n:=len(postorder)
-	if n==0{
-		return true
-	}
-	root :=postorder[n-1]
-	index:=-1
-	for i:=0;i<n-1;i++{
-		if postorder[i]>root{
-			index=i
-			break
-		}
-	}
-	if index!=-1{
-		for i:=index;i<n-1;i++{
-			if postorder[i]<root{
-				return false
-			}
-		}
-	}
-	if index==-1{
-		return verifyPostorder(postorder[:n-1])
-	}
-
-	return verifyPostorder(postorder[:index])&&verifyPostorder(postorder[index:n-1])
-}
-
-```
+### 32.[二叉搜索树的后序遍历序列](https://leetcode-cn.com/problems/er-cha-sou-suo-shu-de-hou-xu-bian-li-xu-lie-lcof/) 🌟🌟
 
 ### 24.[二叉树中和为某一值的路径](https://leetcode-cn.com/problems/er-cha-shu-zhong-he-wei-mou-yi-zhi-de-lu-jing-lcof/)
 
