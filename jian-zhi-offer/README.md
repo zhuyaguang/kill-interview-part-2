@@ -66,249 +66,23 @@
 
 ### 32.[二叉搜索树的后序遍历序列](https://leetcode-cn.com/problems/er-cha-sou-suo-shu-de-hou-xu-bian-li-xu-lie-lcof/) 🌟🌟
 
-### 24.[二叉树中和为某一值的路径](https://leetcode-cn.com/problems/er-cha-shu-zhong-he-wei-mou-yi-zhi-de-lu-jing-lcof/)
+### 33.[二叉树中和为某一值的路径](https://leetcode-cn.com/problems/er-cha-shu-zhong-he-wei-mou-yi-zhi-de-lu-jing-lcof/) 经典回溯🌟🌟
 
-```go
-var trace []int
-var result [][]int
-func pathSum(root *TreeNode, target int) [][]int {
-	trace=[]int{}
-	result=[][]int{}
-	if root==nil{
-		return result
-	}
-	dfs1(root,trace,target)
+### 34.[复杂链表的复制](https://leetcode-cn.com/problems/fu-za-lian-biao-de-fu-zhi-lcof/) 🌟 Map
 
-   return result
-}
+### 35.[二叉搜索树与双向链表](https://leetcode-cn.com/problems/er-cha-sou-suo-shu-yu-shuang-xiang-lian-biao-lcof/) 🌟
 
-func dfs1(root *TreeNode,trace []int,tar int)  {
-    if root==nil{
-        return
-    }
-    trace=append(trace,root.Val)
-    tar=tar-root.Val
-	if tar==0&&root.Left==nil&&root.Right==nil{
-		tmp:=make([]int,len(trace))
-		copy(tmp,trace)
-		result=append(result,tmp)
-		return
-	}
-	
-    dfs1(root.Left,trace,tar)
-	dfs1(root.Right,trace,tar)
-	trace=trace[:len(trace)-1]
+### 36.[序列化二叉树](https://leetcode-cn.com/problems/xu-lie-hua-er-cha-shu-lcof/) 🌟🌟
 
-}
+### 37.[字符串的排列](https://leetcode-cn.com/problems/zi-fu-chuan-de-pai-lie-lcof/) 🌟回溯
 
-```
+### 38.[数组中出现次数超过一半的数字](https://leetcode-cn.com/problems/shu-zu-zhong-chu-xian-ci-shu-chao-guo-yi-ban-de-shu-zi-lcof/)
 
-### 25.[复杂链表的复制](https://leetcode-cn.com/problems/fu-za-lian-biao-de-fu-zhi-lcof/)
+### 39.[最小的K个数](https://leetcode-cn.com/problems/zui-xiao-de-kge-shu-lcof/) 🌟 堆
 
-```go
-func copyRandomList(head *Node) *Node {
-     nMap:=make(map[*Node]*Node)
-     cur :=head
-     next:=head
-     for cur!=nil{
-     	tmp:=&Node{
-			Val:    cur.Val,
-		}
-     	nMap[cur]=tmp
-     	cur=cur.Next
-	 }
-	 for next!=nil{
-	 	nMap[next].Random=nMap[next.Random]
-		nMap[next].Next=nMap[next.Next]
-        next=next.Next
-	 }
-	 return nMap[head]
-}
-```
+### 40.[数据流中的中位数](https://leetcode-cn.com/problems/shu-ju-liu-zhong-de-zhong-wei-shu-lcof/) 🌟 堆
 
-### 26.[二叉搜索树与双向链表](https://leetcode-cn.com/problems/er-cha-sou-suo-shu-yu-shuang-xiang-lian-biao-lcof/)
-
-```go
-type TreeNode struct {
-	Val   int
-	Left  *TreeNode
-	Right *TreeNode
-}
-
-var pre *TreeNode
-var head *TreeNode
-
-func treeToDoublyList(root *TreeNode) *TreeNode {
-	if root == nil {
-		return nil
-	}
-	pre = nil
-	head = nil
-	convert(root)
-	pre.Right = head
-	head.Left = pre
-	return head
-}
-
-func convert(root *TreeNode) {
-	if root == nil {
-		return
-	}
-	convert(root.Left)
-	if pre == nil {
-		head = root
-	}else {
-		pre.Right = root
-		root.Left = pre
-	}
-	pre = root
-	convert(root.Right)
-}
-```
-
-
-
-### 27.[字符串的排列](https://leetcode-cn.com/problems/zi-fu-chuan-de-pai-lie-lcof/)
-
-```go
-var resultS []string
-var traces string
-func permutation(s string) []string {
-	if len(s) == 0 {
-		return nil
-	}
-     resultS=[]string{}
-     traces = ""
-     stringArr :=[]string{}
-     for _,v:=range s{
-     	stringArr = append(stringArr,string(v))
-	 }
-	 sort.Strings(stringArr)
-     visit :=make([]bool,len(stringArr))
-
-	backtracks(stringArr,traces,visit)
-
-	return resultS
-}
-
-func backtracks(s []string ,traces string,visit []bool)  {
-	if len(traces)==len(s){
-		resultS=append(resultS,traces)
-		return
-	}
-	for i:=0;i<len(s);i++{
-		if i>0 && !visit[i-1] && s[i]==s[i-1]{
-			continue
-		}
-		if visit[i]{
-			continue
-		}
-
-			traces=traces+s[i]
-			visit[i]=true
-			backtracks(s,traces,visit)
-			traces=traces[:len(traces)-1]
-			visit[i]=false
-	}
-}
-```
-
-
-
-### 28.[数组中出现次数超过一半的数字](https://leetcode-cn.com/problems/shu-zu-zhong-chu-xian-ci-shu-chao-guo-yi-ban-de-shu-zi-lcof/)
-
-```go
-func majorityElement(nums []int) int {
-    n:=len(nums)
-    target:=0
-    if n%2==0{
-           target=n/2
-    }else{
-        target=n/2+1
-    }
-    rMap:=make(map[int]int)
-    for _,v:=range nums{
-        rMap[v]++
-        if rMap[v]==target{
-            return v
-        }
-    }
-    return 0
-
-}
-```
-
-### 29.[最小的K个数](https://leetcode-cn.com/problems/zui-xiao-de-kge-shu-lcof/)
-
-```go
-func getLeastNumbers(arr []int, k int) []int {
-	if len(arr) == 0 || k == 0 {
-		return nil
-	}
-
-	// 建堆，大根堆
-	d := &heapInt{}
-	for _, v := range arr {
-		if d.Len() < k {
-			heap.Push(d, v)
-		} else {
-			if d.Peek() > v {
-				heap.Pop(d)
-				heap.Push(d, v)
-			}
-		}
-	}
-	return d.IntSlice
-
-}
-
-type heapInt struct {
-	sort.IntSlice
-}
-
-func (h *heapInt)Less(i,j int)bool {return h.IntSlice[i]>h.IntSlice[j]}
-
-func (h *heapInt) Push(x interface{}) {
-	h.IntSlice = append(h.IntSlice, x.(int))
-}
-func (h *heapInt) Pop() interface{} {
-	a := h.IntSlice
-	t := a[len(a)-1]
-	h.IntSlice = a[:len(a)-1]
-	return t
-}
-func (h *heapInt) Peek() int {
-	return h.IntSlice[0]
-}
-```
-
-### 30.[连续子数组的最大和](https://leetcode-cn.com/problems/lian-xu-zi-shu-zu-de-zui-da-he-lcof/)
-
-```go
-func maxSubArray(nums []int) int {
-    if len(nums) == 1{
-        return nums[0]
-    }
-    max:=nums[0]
-    dp :=make([]int,len(nums))
-    dp[0]=nums[0]
-    for i:=1;i<len(nums);i++{ 
-        if dp[i-1]+nums[i] >= nums[i] {
-            dp[i]=dp[i-1]+nums[i]
-            if dp[i]>=max{
-                max = dp[i]
-            }
-        }else {
-            dp[i]=nums[i]
-            if dp[i]>=max{
-                max = dp[i]
-            }
-        }
-        
-    }
-    return max
-}
-```
+### 41.[连续子数组的最大和](https://leetcode-cn.com/problems/lian-xu-zi-shu-zu-de-zui-da-he-lcof/) 🌟 dp
 
 ### 31.[整数中1出现的次数（从1到n整数中1出现的次数)](https://leetcode-cn.com/problems/1nzheng-shu-zhong-1chu-xian-de-ci-shu-lcof/)
 
@@ -1073,13 +847,13 @@ func helper(root1,root2 *TreeNode) bool{
 
 层次遍历
 
-### 61.[序列化二叉树](https://leetcode-cn.com/problems/xu-lie-hua-er-cha-shu-lcof/)
+### 
 
 ### 62.[二叉搜索树的第k个结点](https://leetcode-cn.com/problems/er-cha-sou-suo-shu-de-di-kda-jie-dian-lcof/)
 
 中序遍历
 
-### 63.[数据流中的中位数](https://leetcode-cn.com/problems/shu-ju-liu-zhong-de-zhong-wei-shu-lcof/)
+### 
 
 ### 64.[滑动窗口的最大值](https://leetcode-cn.com/problems/hua-dong-chuang-kou-de-zui-da-zhi-lcof/)
 
