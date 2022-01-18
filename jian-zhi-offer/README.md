@@ -84,115 +84,17 @@
 
 ### 41.[连续子数组的最大和](https://leetcode-cn.com/problems/lian-xu-zi-shu-zu-de-zui-da-he-lcof/) 🌟 dp
 
-### 31.[整数中1出现的次数（从1到n整数中1出现的次数)](https://leetcode-cn.com/problems/1nzheng-shu-zhong-1chu-xian-de-ci-shu-lcof/)
+### 42.[整数中1出现的次数（从1到n整数中1出现的次数)](https://leetcode-cn.com/problems/1nzheng-shu-zhong-1chu-xian-de-ci-shu-lcof/) ✨
 
-```go
-func countDigitOne(n int) int {
-	// 这里 digitNum 为 digit 所在位 对应的可能性
-	// 其实位为个位 因此 digitNum = 1  1乘以任何数 = 任何数
-	digitNum, sum := 1, 0
-	high, cur, low := n/10, n%10, 0
-	for high != 0 || cur != 0 {
-		// 固定位 计算数量
-		if cur < 1 {
-			sum += high * digitNum
-		} else if cur == 1 {
-			sum += high*digitNum + low + 1
-		} else {
-			sum += (high + 1) * digitNum
-		}
-		// 换下一位 更新高低位 及digit数量级
-		low = low + cur*digitNum
-		high, cur = high/10, high%10
-		digitNum = digitNum * 10
-	}
-	return sum
-}
-```
+### 43.[数字序列中某一位的数字](https://leetcode-cn.com/problems/shu-zi-xu-lie-zhong-mou-yi-wei-de-shu-zi-lcof/) ✨
 
-### 31-1[剑指 Offer 44. 数字序列中某一位的数字](https://leetcode-cn.com/problems/shu-zi-xu-lie-zhong-mou-yi-wei-de-shu-zi-lcof/)
+### 44.[把数组排成最小的数](https://leetcode-cn.com/problems/ba-shu-zu-pai-cheng-zui-xiao-de-shu-lcof/) 排序 🌟
 
+### 45.[把数字翻译成字符串](https://leetcode-cn.com/problems/ba-shu-zi-fan-yi-cheng-zi-fu-chuan-lcof/) 递归🌟
 
+### 46.[礼物的最大价值](https://leetcode-cn.com/problems/li-wu-de-zui-da-jie-zhi-lcof/) 简单二维dp数组🌟
 
-### 32.[把数组排成最小的数](https://leetcode-cn.com/problems/ba-shu-zu-pai-cheng-zui-xiao-de-shu-lcof/)
-
-```go
-func minNumber(nums []int) string {
-        for i:=0;i<len(nums)-1;i++{
-			for j:=i+1;j<len(nums);j++ {
-				if compare(nums[i],nums[j]){
-					nums[i],nums[j]=nums[j],nums[i]
-				}
-			}
-		}
-		s:=""
-		
-		for i:=range nums{
-			s=s+strconv.Itoa(nums[i])
-		}
-		return s
-}
-
-
-func compare(a,b int)bool{
-	sa:= strconv.Itoa(a)+strconv.Itoa(b)
-	sb:= strconv.Itoa(b)+strconv.Itoa(a)
-	na,_:=strconv.Atoi(sa)
-	nb,_:=strconv.Atoi(sb)
-
-	return na>nb
-}
-```
-
-32-1.[剑指 Offer 46. 把数字翻译成字符串](https://leetcode-cn.com/problems/ba-shu-zi-fan-yi-cheng-zi-fu-chuan-lcof/)
-
-~~~go
-func translateNum(num int) int {
-    if num <=9{
-        return 1
-    }
-    ba :=num%100
-    if ba <=9 || ba >=26{
-        return translateNum(num/10)
-    }else{
-        return translateNum(num/10)+translateNum(num/100)
-    }
-
-}
-~~~
-
-32-2.[剑指 Offer 47. 礼物的最大价值](https://leetcode-cn.com/problems/li-wu-de-zui-da-jie-zhi-lcof/)
-
-~~~go
-// 二维的dp数组
-func maxValue(grid [][]int) int {
-        m:=len(grid)
-        n:=len(grid[0])
-        for i:=1;i<n;i++{
-            grid[0][i]+=grid[0][i-1]
-        }
-        for i:=1;i<m;i++{
-            grid[i][0]+=grid[i-1][0]
-        }
-        fmt.Print(grid)
-        for i:=1;i<m;i++{
-            for j:=1;j<n;j++{
-                grid[i][j]+=max(grid[i-1][j],grid[i][j-1])
-            }
-        }
-        return grid[m-1][n-1]
-}
-
-func max(a,b int)int{
-    if a>=b{
-        return a
-    }else {
-        return b
-    }
-}
-~~~
-
-32-3.[剑指 Offer 48. 最长不含重复字符的子字符串](https://leetcode-cn.com/problems/zui-chang-bu-han-zhong-fu-zi-fu-de-zi-zi-fu-chuan-lcof/)
+### 47.[最长不含重复字符的子字符串](https://leetcode-cn.com/problems/zui-chang-bu-han-zhong-fu-zi-fu-de-zi-zi-fu-chuan-lcof/)
 
 ~~~go
 func lengthOfLongestSubstring(s string) int {
