@@ -94,124 +94,17 @@
 
 ### 46.[礼物的最大价值](https://leetcode-cn.com/problems/li-wu-de-zui-da-jie-zhi-lcof/) 简单二维dp数组🌟
 
-### 47.[最长不含重复字符的子字符串](https://leetcode-cn.com/problems/zui-chang-bu-han-zhong-fu-zi-fu-de-zi-zi-fu-chuan-lcof/)
+### 47.[最长不含重复字符的子字符串](https://leetcode-cn.com/problems/zui-chang-bu-han-zhong-fu-zi-fu-de-zi-zi-fu-chuan-lcof/)  滑动窗口🌟🌟
 
-~~~go
-func lengthOfLongestSubstring(s string) int {
-	if len(s)==0{
-		return 0
-	}
-	if len(s)==1{
-		return 1
-	}
+### 48.[丑数](https://leetcode-cn.com/problems/chou-shu-lcof/) 动态规划✨
 
-	windows :=make(map[string]int)
-	left :=0
-	right :=0
-	max :=-1
-	for right < len(s){
-		c :=s[right:right+1]
-        right++
-		windows[c]++
-		for windows[c]>1{
-			c2 :=s[left:left+1]
-			left++
-			windows[c2]--
-		}
-		if right-left>max{
-			max = right-left
-		}
-	}
-	if max == -1{
-		max = len(s)
-	}
-	return max
-}
-~~~
+### 49.[第一个只出现一次的字符位置](https://leetcode-cn.com/problems/di-yi-ge-zhi-chu-xian-yi-ci-de-zi-fu-lcof/)
+
+### 50.[数组中的逆序对](https://leetcode-cn.com/problems/shu-zu-zhong-de-ni-xu-dui-lcof/) ✨
+
+### 51.[两个链表的第一个公共结点](https://leetcode-cn.com/problems/liang-ge-lian-biao-de-di-yi-ge-gong-gong-jie-dian-lcof/)
 
 
-
-### 33.[丑数](https://leetcode-cn.com/problems/chou-shu-lcof/)
-
-### 34.[第一个只出现一次的字符位置](https://leetcode-cn.com/problems/di-yi-ge-zhi-chu-xian-yi-ci-de-zi-fu-lcof/)
-
-~~~go
-func firstUniqChar(s string) byte {
-    n:=len(s)
-    if n==0{
-        return ' '
-    }
-    bMap:=make(map[byte]int)
-    for i,_:=range s{
-        bMap[s[i]]++
-    }
-
-    for i,_:=range s{
-        if bMap[s[i]]==1{
-            return s[i]
-        }
-    }
-  
-     return ' '
-
-}
-~~~
-
-### 35.[数组中的逆序对](https://leetcode-cn.com/problems/shu-zu-zhong-de-ni-xu-dui-lcof/)
-
-暴力
-
-### 36.[两个链表的第一个公共结点](https://leetcode-cn.com/problems/liang-ge-lian-biao-de-di-yi-ge-gong-gong-jie-dian-lcof/)
-
-```go
-
-func getIntersectionNode(headA, headB *ListNode) *ListNode {
-	if headA==nil||headB==nil{
-		return nil
-	}
-    if headA==headB{
-		return headA
-	}
-	startA:=headA
-	startB:=headB
-	lenA:=0
-	lenB:=0
-	gap:=0
-	for startA!=nil{
-		lenA++
-		startA=startA.Next
-	}
-	for startB!=nil{
-		lenB++
-		startB=startB.Next
-	}
-	if lenA>lenB{
-		gap=lenA-lenB
-		for gap>0{
-			headA=headA.Next
-			gap--
-		}
-	}else{
-		gap=lenB-lenA
-		for gap>0{
-			headB=headB.Next
-			gap--
-		}
-	}
-    	if headA==headB{
-		return headA
-	}
-       for headA.Next!=nil&&headB.Next!=nil{
-       	   if headA.Next==headB.Next{
-       	   	return headA.Next
-		   }
-		   headA=headA.Next
-		   headB=headB.Next
-	   }
-
-	   return nil
-}
-```
 
 36-2.[剑指 Offer 53 - II. 0～n-1中缺失的数字](https://leetcode-cn.com/problems/que-shi-de-shu-zi-lcof/)
 
